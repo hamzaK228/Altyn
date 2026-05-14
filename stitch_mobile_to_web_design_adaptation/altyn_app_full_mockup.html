@@ -1,0 +1,174 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.wrap { display: flex; flex-direction: column; gap: 24px; padding: 16px 0; }
+.phone-wrap { background: var(--color-background-secondary); border-radius: 24px; border: 0.5px solid var(--color-border-tertiary); padding: 10px; max-width: 300px; margin: 0 auto; }
+.screen { background: var(--color-background-primary); border-radius: 16px; overflow: hidden; border: 0.5px solid var(--color-border-tertiary); }
+.screen-label { text-align: center; font-size: 11px; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.05em; }
+.gold-header { background: #854F0B; padding: 18px 16px 14px; }
+.gold-header p { color: #FAEEDA; }
+.gh-title { font-size: 12px; opacity: 0.8; margin-bottom: 2px; }
+.gh-amount { font-size: 26px; font-weight: 500; margin-bottom: 2px; }
+.gh-sub { font-size: 12px; opacity: 0.7; }
+.gh-badge { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 6px; padding: 2px 8px; font-size: 11px; color: #FAEEDA; margin-top: 6px; }
+.sec { padding: 12px 14px; }
+.sec-lbl { font-size: 10px; color: var(--color-text-secondary); letter-spacing: 0.06em; margin-bottom: 8px; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 6px; }
+.stat { background: var(--color-background-secondary); border-radius: 8px; padding: 8px 10px; }
+.stat-v { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.stat-l { font-size: 10px; color: var(--color-text-secondary); margin-top: 1px; }
+.chart-area { height: 52px; display: flex; align-items: flex-end; gap: 3px; padding: 0 14px 0; }
+.bar { flex: 1; border-radius: 3px 3px 0 0; background: #EF9F27; }
+.bar.active { background: #854F0B; }
+.chart-lbls { display: flex; gap: 3px; padding: 3px 14px 8px; }
+.cl { flex: 1; font-size: 9px; color: var(--color-text-secondary); text-align: center; }
+.divider { height: 0.5px; background: var(--color-border-tertiary); }
+.btns { display: flex; gap: 8px; padding: 10px 14px; }
+.btn-g { flex: 1; background: #854F0B; color: #FAEEDA; border: none; border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn-w { flex: 1; background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; }
+.nav { display: flex; justify-content: space-around; padding: 8px 0 4px; border-top: 0.5px solid var(--color-border-tertiary); }
+.ni { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 9px; color: var(--color-text-secondary); }
+.ni.on { color: #854F0B; }
+.form-sec { padding: 14px; }
+.inp-lbl { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.inp-wrap { display: flex; align-items: center; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+.inp-wrap span { font-size: 13px; color: var(--color-text-secondary); margin-right: 6px; }
+.inp-wrap p { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.calc-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.calc-k { font-size: 12px; color: var(--color-text-secondary); }
+.calc-v { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.reg-header { background: #854F0B; padding: 20px 16px; text-align: center; }
+.reg-logo { font-size: 22px; font-weight: 500; color: #FAEEDA; }
+.reg-sub { font-size: 11px; color: #EF9F27; margin-top: 3px; }
+.field { margin-bottom: 10px; }
+.field label { display: block; font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.field-inp { width: 100%; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: var(--color-text-primary); }
+.field-inp::placeholder { color: var(--color-text-secondary); }
+.amount-slider { width: 100%; margin: 8px 0; }
+.preview-box { background: #FAEEDA; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin: 10px 0; }
+.preview-box span { font-size: 12px; color: #633806; }
+.preview-box strong { font-size: 16px; font-weight: 500; color: #412402; }
+</style>
+
+<div class="wrap">
+
+  <div>
+    <p class="screen-label">Экран 1 — Регистрация</p>
+    <div class="phone-wrap">
+      <div class="screen">
+        <div class="reg-header">
+          <p class="reg-logo">Алтын</p>
+          <p class="reg-sub">Государственное золото Кыргызстана</p>
+        </div>
+        <div class="form-sec">
+          <div class="field">
+            <label>Имя и фамилия</label>
+            <div class="field-inp" style="color: var(--color-text-secondary); font-size:13px;">Айбек Матанов</div>
+          </div>
+          <div class="field">
+            <label>Номер телефона</label>
+            <div class="field-inp" style="color: var(--color-text-secondary); font-size:13px;">+996 700 123 456</div>
+          </div>
+          <div class="field">
+            <label>ИНН (паспорт)</label>
+            <div class="field-inp" style="color: var(--color-text-secondary); font-size:13px;">1 2345 6789 0</div>
+          </div>
+          <button class="btn-g" style="width:100%; margin-top:4px;">Зарегистрироваться</button>
+          <p style="text-align:center; font-size:11px; color:var(--color-text-secondary); margin-top:10px;">Защищено Нацбанком КР</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="screen-label">Экран 2 — Главная</p>
+    <div class="phone-wrap">
+      <div class="screen">
+        <div class="gold-header">
+          <p class="gh-title">Моё золото</p>
+          <p class="gh-amount">3.25 г</p>
+          <p class="gh-sub">≈ 12 480 сом · $143</p>
+          <span class="gh-badge">+2.4% за месяц</span>
+        </div>
+        <div class="sec">
+          <p class="sec-lbl">ЦЕНА ЗОЛОТА (6 МЕС.)</p>
+        </div>
+        <div class="chart-area">
+          <div class="bar" style="height:52%"></div>
+          <div class="bar" style="height:60%"></div>
+          <div class="bar" style="height:55%"></div>
+          <div class="bar" style="height:72%"></div>
+          <div class="bar" style="height:84%"></div>
+          <div class="bar active" style="height:100%"></div>
+        </div>
+        <div class="chart-lbls">
+          <span class="cl">Дек</span><span class="cl">Янв</span><span class="cl">Фев</span>
+          <span class="cl">Мар</span><span class="cl">Апр</span><span class="cl">Май</span>
+        </div>
+        <div class="divider"></div>
+        <div class="sec">
+          <p class="sec-lbl">СТАТИСТИКА</p>
+          <div class="stats">
+            <div class="stat"><p class="stat-v">$3 820</p><p class="stat-l">За унцию сейчас</p></div>
+            <div class="stat"><p class="stat-v">+18%</p><p class="stat-l">Рост за год</p></div>
+            <div class="stat"><p class="stat-v">2041</p><p class="stat-l">Запасы до</p></div>
+            <div class="stat"><p class="stat-v">560 т</p><p class="stat-l">Резерв Кумтора</p></div>
+          </div>
+        </div>
+        <div class="btns">
+          <button class="btn-g">Купить</button>
+          <button class="btn-w">Продать</button>
+        </div>
+        <div class="nav">
+          <div class="ni on"><i class="ti ti-home" style="font-size:16px" aria-hidden="true"></i><span>Главная</span></div>
+          <div class="ni"><i class="ti ti-chart-line" style="font-size:16px" aria-hidden="true"></i><span>График</span></div>
+          <div class="ni"><i class="ti ti-coin" style="font-size:16px" aria-hidden="true"></i><span>Купить</span></div>
+          <div class="ni"><i class="ti ti-user" style="font-size:16px" aria-hidden="true"></i><span>Профиль</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="screen-label">Экран 3 — Покупка</p>
+    <div class="phone-wrap">
+      <div class="screen">
+        <div style="padding: 14px 14px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); display:flex; align-items:center; gap:8px;">
+          <i class="ti ti-arrow-left" style="font-size:18px; color:var(--color-text-secondary)" aria-hidden="true"></i>
+          <p style="font-size:15px; font-weight:500; color:var(--color-text-primary);">Купить золото</p>
+        </div>
+        <div class="form-sec">
+          <p class="inp-lbl">Сумма в сомах</p>
+          <div class="inp-wrap">
+            <span>сом</span>
+            <p id="buy-som">5 000</p>
+          </div>
+          <input type="range" min="500" max="50000" value="5000" step="500" class="amount-slider" id="buy-slider">
+          <div class="preview-box">
+            <span>Вы получите</span>
+            <strong id="buy-grams">1.30 г</strong>
+          </div>
+          <div class="calc-row"><span class="calc-k">Цена за грамм</span><span class="calc-v">3 840 сом</span></div>
+          <div class="calc-row"><span class="calc-k">Комиссия</span><span class="calc-v">0%</span></div>
+          <div class="calc-row" style="border:none;"><span class="calc-k">Хранение</span><span class="calc-v">Нацбанк КР</span></div>
+          <button class="btn-g" style="width:100%; margin-top:12px;">Подтвердить покупку</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const slider = document.getElementById('buy-slider');
+const somEl = document.getElementById('buy-som');
+const gramsEl = document.getElementById('buy-grams');
+const pricePerGram = 3840;
+slider.addEventListener('input', function() {
+  const val = parseInt(this.value);
+  somEl.textContent = val.toLocaleString('ru-RU');
+  const grams = (val / pricePerGram).toFixed(2);
+  gramsEl.textContent = grams + ' г';
+});
+</script>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Altyn - Support &amp; Help Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#88520e",
+                        "outline": "#847467",
+                        "inverse-on-surface": "#fbefdb",
+                        "on-primary-container": "#ffca99",
+                        "tertiary-fixed-dim": "#c1c6d7",
+                        "primary": "#663a00",
+                        "surface": "#fff8f1",
+                        "on-tertiary-container": "#cfd5e5",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary": "#3f4552",
+                        "secondary-fixed-dim": "#ffb95d",
+                        "on-background": "#201b0f",
+                        "secondary-fixed": "#ffddb7",
+                        "on-primary-fixed-variant": "#693c00",
+                        "on-tertiary-fixed-variant": "#414754",
+                        "on-tertiary-fixed": "#161c27",
+                        "primary-container": "#854f0b",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#524438",
+                        "surface-container-highest": "#ede1cd",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#d6c3b3",
+                        "on-surface": "#201b0f",
+                        "surface-bright": "#fff8f1",
+                        "on-secondary-container": "#6b4200",
+                        "inverse-surface": "#363022",
+                        "surface-dim": "#e4d9c5",
+                        "surface-container": "#f8ecd8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb870",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fcaa33",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#dde2f3",
+                        "surface-container-low": "#fef2de",
+                        "primary-fixed": "#ffdcbe",
+                        "surface-variant": "#ede1cd",
+                        "error": "#ba1a1a",
+                        "secondary": "#855400",
+                        "surface-container-high": "#f3e7d3",
+                        "tertiary-container": "#565c6a",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb870",
+                        "on-primary-fixed": "#2d1600",
+                        "background": "#fff8f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 bg-background/95 backdrop-blur-md border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<span class="font-display-lg text-display-lg font-bold text-primary">Altyn</span>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-body-md text-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-body-md text-body-md" href="#">Market Data</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-body-md text-body-md" href="#">Transfers</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-body-md text-body-md" href="#">Reserves</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 opacity-80 transition-opacity font-body-md text-body-md" href="#">Support</a>
+</nav>
+<div class="hidden md:flex items-center gap-base">
+<button class="px-4 py-2 border border-tertiary text-tertiary rounded font-label-lg text-label-lg hover:bg-surface-container-high transition-colors">Open Account</button>
+<button class="px-4 py-2 bg-gradient-to-b from-secondary-container to-primary-container text-on-primary rounded font-label-lg text-label-lg hover:opacity-90 transition-opacity shadow-[0_2px_4px_rgba(133,79,11,0.08)]">Secure Login</button>
+</div>
+<!-- Mobile Menu Icon (Placeholder for actual functionality) -->
+<div class="md:hidden flex items-center">
+<span class="material-symbols-outlined text-on-surface cursor-pointer">menu</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[100px] md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Hero Search Section -->
+<section class="text-center mb-section-gap">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-base">How can we assist you?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-gutter">Search our knowledge base or reach out to our treasury support team.</p>
+<div class="max-w-2xl mx-auto relative shadow-[0_4px_12px_rgba(133,79,11,0.05)] rounded-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-full border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md text-on-surface placeholder:text-outline-variant outline-none" placeholder="Search FAQ, topics, or issues..." type="text"/>
+</div>
+</section>
+<!-- Bento Grid: Help Categories -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-section-gap">
+<!-- Getting Started -->
+<a class="block bg-surface-container-lowest border border-surface-dim rounded-xl p-6 hover:shadow-[0_8px_24px_rgba(133,79,11,0.08)] transition-shadow group" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary">rocket_launch</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Getting Started</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Account creation, identity verification, and initial deposits.</p>
+</a>
+<!-- Security -->
+<a class="block bg-surface-container-lowest border border-surface-dim rounded-xl p-6 hover:shadow-[0_8px_24px_rgba(133,79,11,0.08)] transition-shadow group" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Security</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">2FA setup, device management, and fraud prevention guidelines.</p>
+</a>
+<!-- Buying/Selling -->
+<a class="block bg-surface-container-lowest border border-surface-dim rounded-xl p-6 hover:shadow-[0_8px_24px_rgba(133,79,11,0.08)] transition-shadow group" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary">swap_horiz</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Buying/Selling</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Transaction limits, fees, market execution, and settlement times.</p>
+</a>
+<!-- Technical -->
+<a class="block bg-surface-container-lowest border border-surface-dim rounded-xl p-6 hover:shadow-[0_8px_24px_rgba(133,79,11,0.08)] transition-shadow group" href="#">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary">settings_ethernet</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Technical</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">API access, platform troubleshooting, and system status.</p>
+</a>
+</section>
+<!-- Two Column Content Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Contact Form -->
+<section class="lg:col-span-2 bg-surface-container-lowest border border-surface-dim rounded-xl p-8 shadow-[0_4px_12px_rgba(133,79,11,0.05)]">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Submit a Request</h2>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">Full Name</label>
+<input class="w-full p-3 rounded border border-outline/20 bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-body-md text-body-md text-on-surface" type="text"/>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">Account Email</label>
+<input class="w-full p-3 rounded border border-outline/20 bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-body-md text-body-md text-on-surface" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">Issue Category</label>
+<select class="w-full p-3 rounded border border-outline/20 bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-body-md text-body-md text-on-surface">
+<option>Account Access</option>
+<option>Transaction Query</option>
+<option>Verification</option>
+<option>Other</option>
+</select>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">Message</label>
+<textarea class="w-full p-3 rounded border border-outline/20 bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-body-md text-body-md text-on-surface resize-none" placeholder="Please provide details regarding your inquiry..." rows="5"></textarea>
+</div>
+<button class="w-full md:w-auto px-8 py-3 bg-gradient-to-b from-secondary-container to-primary-container text-on-primary rounded font-label-lg text-label-lg hover:opacity-90 transition-opacity shadow-[0_2px_4px_rgba(133,79,11,0.08)] active:shadow-inner" type="submit">Submit Request</button>
+</form>
+</section>
+<!-- Tier 2 Support & Live Chat Teaser -->
+<div class="space-y-gutter">
+<!-- NBKR Tier 2 Info -->
+<section class="bg-surface-container-high rounded-xl p-6 border border-surface-dim relative overflow-hidden">
+<!-- Subtle watermark -->
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-primary/5 select-none pointer-events-none" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 relative z-10">Regulatory Oversight</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 relative z-10">Altyn operations are strictly monitored. For escalated concerns regarding treasury operations, contact the central authority.</p>
+<div class="space-y-3 relative z-10 border-t border-outline-variant/50 pt-4">
+<p class="font-label-lg text-label-lg text-on-surface">National Bank of the Kyrgyz Republic</p>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<span class="font-body-md text-body-md">101 T. Umetaliev St, Bishkek</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">call</span>
+<span class="font-body-md text-body-md">+996 (312) 66-90-11</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+<span class="font-body-md text-body-md">mail@nbkr.kg</span>
+</div>
+</div>
+</section>
+<!-- Live Chat Widget Teaser -->
+<section class="bg-surface-container-lowest border border-surface-dim rounded-xl p-6 text-center flex flex-col items-center">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-4 relative">
+<span class="material-symbols-outlined text-primary text-[32px]">support_agent</span>
+<span class="absolute top-0 right-0 w-4 h-4 bg-[#22c55e] border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Live Concierge</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Chat directly with a Treasury Support Specialist.</p>
+<button class="px-6 py-2 border border-primary text-primary rounded font-label-lg text-label-lg hover:bg-surface-container transition-colors w-full">Start Chat</button>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-base px-margin-desktop mt-section-gap flex flex-col md:flex-row justify-between items-center gap-base bg-surface-container-high border-t border-surface-dim">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Altyn</div>
+<div class="flex flex-wrap justify-center gap-4 md:gap-gutter">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Security Protocol</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Public Disclosures</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Contact Treasury</a>
+</div>
+<div class="text-on-surface-variant font-label-md text-label-md text-center md:text-right">
+            © 2024 Altyn State Gold Treasury. Regulated by the National Bank of the Kyrgyz Republic.
+        </div>
+</footer>
+</body></html>

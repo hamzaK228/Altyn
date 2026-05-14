@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Altyn - Sovereign Wealth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary": "#663a00",
+                        "surface-dim": "#e4d9c5",
+                        "surface-variant": "#ede1cd",
+                        "on-primary-fixed": "#2d1600",
+                        "surface-container-highest": "#ede1cd",
+                        "background": "#fff8f1",
+                        "on-surface": "#201b0f",
+                        "tertiary-container": "#565c6a",
+                        "on-surface-variant": "#524438",
+                        "secondary-fixed": "#ffddb7",
+                        "on-secondary-fixed": "#2a1700",
+                        "secondary-container": "#fcaa33",
+                        "on-primary-container": "#ffca99",
+                        "on-background": "#201b0f",
+                        "inverse-primary": "#ffb870",
+                        "surface-bright": "#fff8f1",
+                        "primary-container": "#854f0b",
+                        "on-tertiary-fixed-variant": "#414754",
+                        "surface": "#fff8f1",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#c1c6d7",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d6c3b3",
+                        "outline": "#847467",
+                        "on-primary-fixed-variant": "#693c00",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#161c27",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#f3e7d3",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#dde2f3",
+                        "surface-container": "#f8ecd8",
+                        "secondary-fixed-dim": "#ffb95d",
+                        "tertiary": "#3f4552",
+                        "on-tertiary-container": "#cfd5e5",
+                        "inverse-surface": "#363022",
+                        "inverse-on-surface": "#fbefdb",
+                        "secondary": "#855400",
+                        "primary-fixed-dim": "#ffb870",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#fef2de",
+                        "surface-tint": "#88520e",
+                        "on-secondary-container": "#6b4200",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdcbe",
+                        "on-secondary-fixed-variant": "#653e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-lg": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-inverse-primary font-body-md text-body-md border-b border-outline-variant dark:border-outline flat no shadows fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 bg-background/95 backdrop-blur-md">
+<div class="flex items-center gap-base">
+<span class="font-display-lg text-display-lg font-bold text-primary dark:text-inverse-primary leading-none tracking-tight">Altyn</span>
+</div>
+<nav class="hidden md:flex items-center gap-gutter h-full pt-1">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors h-full flex items-center" href="#">Dashboard</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary dark:border-inverse-primary pb-1 hover:text-primary dark:hover:text-inverse-primary transition-colors h-full flex items-center" href="#">Market Data</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors h-full flex items-center" href="#">Transfers</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors h-full flex items-center" href="#">Reserves</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors h-full flex items-center" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-base">
+<button class="hidden md:flex items-center justify-center px-4 py-2 border border-on-surface text-on-surface font-label-lg text-label-lg rounded-DEFAULT hover:bg-surface-container transition-colors">Open Account</button>
+<button class="flex items-center justify-center px-6 py-2 bg-gradient-to-b from-secondary-container to-primary-container text-white font-label-lg text-label-lg rounded-DEFAULT shadow-[inset_0_-2px_4px_rgba(0,0,0,0.2)] hover:opacity-90 transition-opacity">Secure Login</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col gap-section-gap py-section-gap">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center min-h-[716px]">
+<div class="md:col-span-5 flex flex-col gap-6 z-10 relative">
+<div class="inline-flex items-center gap-2 bg-surface-container-high border border-outline-variant px-3 py-1.5 rounded-full w-fit">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Live State Exchange</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Own the Future with Kyrgyzstan's Gold</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Secure your wealth directly through the National Bank. Institutional-grade physical reserves, now accessible for direct sovereign investment.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-4">
+<button class="px-8 py-3 bg-gradient-to-b from-secondary-container to-primary-container text-white font-label-lg text-label-lg rounded-DEFAULT shadow-[0_4px_14px_rgba(133,79,11,0.2),inset_0_-2px_4px_rgba(0,0,0,0.2)] hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                        Start Investing
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="px-8 py-3 border border-outline text-on-surface font-label-lg text-label-lg rounded-DEFAULT hover:bg-surface-container transition-colors flex items-center justify-center">
+                        View Prospectus
+                    </button>
+</div>
+</div>
+<div class="md:col-span-7 relative h-[500px] w-full rounded-xl overflow-hidden border border-outline-variant shadow-[0_20px_40px_rgba(133,79,11,0.08)] group">
+<img class="w-full h-full object-cover" data-alt="A macro, ultra-high-resolution photograph of a pristine, solid gold bullion bar resting on a dark, polished marble surface. The lighting is sophisticated and dramatic, highlighting the stamped state insignia and weight details on the metallic surface, reflecting deep, rich amber and primary gold hues (#854F0B). The scene exudes premium security, institutional wealth, and sovereign stability, captured with an extremely shallow depth of field to draw focus to the intricate texture of the gold against the deep charcoal background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs-00UBVyQF5Ov7gE2SBjIpqPAmwF4AmaVxZK2YwUvr3Fd2d5Yg34JazBhb8yOEmNdupDmaotb_1ik7v7Z317qTIR9_7k_g2o84H1zLBvwqvfAoQgYNxtMKYRKtNZ6eTXpp5GzutVDH0-zmAveicNYN-uaqRI67yVigFMYs6LDJYhv7jjT_qUzYtwKabAsFgCl2P1cJRodL-540gR4xYONUUZ6TU6A5IaEQDNxnx45cIjRRUiHjtEY-Hxi3rm16d_vELEisH0m1KQ"/>
+<!-- Live Price Ticker Overlay -->
+<div class="absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-80 bg-background/90 backdrop-blur-md border border-outline-variant p-6 rounded-lg shadow-lg">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Current Valuation</span>
+<span class="material-symbols-outlined text-primary-container">monitoring</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">3,840</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">SOM / g</span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-primary-container bg-primary-container/10 px-2 py-1 rounded-DEFAULT w-fit">
+<span class="material-symbols-outlined text-[16px] fill">arrow_upward</span>
+<span class="font-label-md text-label-md font-bold">+1.24% (24h)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="flex flex-col gap-10">
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Institutional Security Architecture</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Built upon the foundational stability of the Kyrgyz Republic, designed for the modern investor seeking uncompromised safety.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
+<!-- Large Feature -->
+<div class="md:col-span-2 relative rounded-xl overflow-hidden border border-outline-variant shadow-[0_8px_24px_rgba(133,79,11,0.04)] group bg-surface-container flex flex-col justify-end p-8">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 mix-blend-multiply" data-alt="A striking architectural photograph of a monumental, classical bank building exterior featuring massive stone columns and intricate facades. The image is bathed in soft, warm afternoon light, casting deep, stabilizing shadows that emphasize the building's permanence and authority. The aesthetic leans heavily into institutional trust and sovereign wealth, utilizing a sophisticated palette of warm creams (#fff8f1), rich stone textures, and subtle gold reflections in the windows, conveying an absolute guarantee of security." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVrhDI-zeretSzgaTw6j9Itw1V6fTJmwau439K2J5S3iiAVktZmZtGo9dviBU2D58I9QroTg8CKnNRFG9PK4ybkkmMufns19zbUNE0mHa0qkYZbgho5IVEotnTGBfh1en8EeftmFbF3MikN9c2vvSUo67K6wePGNObvATVfzizoh3BkKKrHXLUGupxudFKs9TG1Rkr8g2pzqtrVs46vJBUhTKbL12pFX7PU-Vnfz70SUFxqY32zvxDDBAWTw-n__rHxUnpaCSWvVg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+</div>
+<div class="relative z-10 flex flex-col gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center border border-primary-container/20 mb-2">
+<span class="material-symbols-outlined text-primary-container text-[24px]">account_balance</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Security guaranteed by the National Bank</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Every gram is fully backed by the state treasury, ensuring unparalleled sovereign protection for your assets.</p>
+</div>
+</div>
+<!-- Small Feature 1 -->
+<div class="relative rounded-xl overflow-hidden border border-outline-variant shadow-[0_8px_24px_rgba(133,79,11,0.04)] bg-surface-container p-6 flex flex-col gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center border border-primary-container/20">
+<span class="material-symbols-outlined text-primary-container text-[20px]">waterfall_chart</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Direct investment in Kyrgyz reserves</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Bypass intermediaries to access wholesale sovereign pricing and direct treasury integration.</p>
+<div class="h-20 w-full rounded-lg overflow-hidden relative opacity-60">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDgwIEwxMCA2MCBMMjAgNjUgTDMwIDQ1IEw0MCA1NSBMNTAgMzAgTDYwIDQwIEw3MCAyMCBMODAgMzAgTDkwIDEwIEwxMDAgMTUgTDExMCA1IEwxMjAgMjUgTDEzMCAxNSBMMTQwIDM1IEwxNTAgMjAgTDE2MCA0MCBMMTcwIDMwIEwxODAgNTAgTDE5MCA0NSBMMjAwIDIwIEwyMDAgODAgWiIgZmlsbD0iI2ZjYWEzMyIgb3BhY2l0eT0iMC4yIi8+PHBhdGggZD0iTTAgODAgTDEwIDYwIEwyMCA2NSBMMzAgNDUgTDQwIDU1IEw1MCAzMCBMNjAgNDAgTDcwIDIwIEw4MCAzMCBMOTAgMTAgTDEwMCAxNSBMMTEwIDUgTDEyMCAyNSBMMTMwIDE1IEwxNDAgMzUgTDE1MCAyMCBMMTYwIDQwIEwxNzAgMzAgTDE4MCA1MCBMMTkwIDQ1IEwyMDAgMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg1NGYwYiIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+')] bg-cover bg-bottom"></div>
+</div>
+</div>
+<!-- Small Feature 2 -->
+<div class="relative rounded-xl overflow-hidden border border-outline-variant shadow-[0_8px_24px_rgba(133,79,11,0.04)] bg-surface-container p-6 flex flex-col gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center border border-primary-container/20">
+<span class="material-symbols-outlined text-primary-container text-[20px]">diamond</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Physical gold backup</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Your digital holdings correspond 1:1 with audited, physical gold bars secured in state vaults.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/50">
+<span class="font-label-md text-label-md text-primary-container uppercase tracking-wider flex items-center gap-1">
+                            View Audit Reports <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high dark:bg-inverse-surface text-primary dark:text-inverse-primary font-label-md text-label-md flat no shadows w-full py-base px-margin-desktop mt-section-gap flex flex-col md:flex-row justify-between items-center gap-base">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">Altyn</div>
+<nav class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Security Protocol</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Public Disclosures</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Contact Treasury</a>
+</nav>
+<div class="text-on-surface-variant dark:text-outline-variant text-center md:text-right max-w-[300px] opacity-80">
+            © 2024 Altyn State Gold Treasury. Regulated by the National Bank of the Kyrgyz Republic.
+        </div>
+</footer>
+</body></html>

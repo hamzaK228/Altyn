@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --altyn-gold: #854F0B;
+  --altyn-light: #EF9F27;
+  --altyn-pale: #FAEEDA;
+}
+
+@layer base {
+  body {
+    @apply bg-background-primary text-white font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-medium tracking-tight;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .glass-gold {
+    @apply bg-altyn/10 backdrop-blur-md border border-altyn/20;
+  }
+  
+  .gold-button {
+    @apply bg-gold-gradient text-altyn-pale px-6 py-3 rounded-xl font-medium transition-all hover:scale-[1.02] active:scale-[0.98] shadow-gold-glow;
+  }
+  
+  .outline-button {
+    @apply border border-border text-white px-6 py-3 rounded-xl font-medium transition-all hover:bg-white/5;
+  }
+}

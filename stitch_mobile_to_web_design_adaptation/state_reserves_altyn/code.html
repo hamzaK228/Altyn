@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reserves - Altyn State Gold Treasury</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#88520e",
+                        "outline": "#847467",
+                        "inverse-on-surface": "#fbefdb",
+                        "on-primary-container": "#ffca99",
+                        "tertiary-fixed-dim": "#c1c6d7",
+                        "primary": "#663a00",
+                        "surface": "#fff8f1",
+                        "on-tertiary-container": "#cfd5e5",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary": "#3f4552",
+                        "secondary-fixed-dim": "#ffb95d",
+                        "on-background": "#201b0f",
+                        "secondary-fixed": "#ffddb7",
+                        "on-primary-fixed-variant": "#693c00",
+                        "on-tertiary-fixed-variant": "#414754",
+                        "on-tertiary-fixed": "#161c27",
+                        "primary-container": "#854f0b",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#524438",
+                        "surface-container-highest": "#ede1cd",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#d6c3b3",
+                        "on-surface": "#201b0f",
+                        "surface-bright": "#fff8f1",
+                        "on-secondary-container": "#6b4200",
+                        "inverse-surface": "#363022",
+                        "surface-dim": "#e4d9c5",
+                        "surface-container": "#f8ecd8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb870",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fcaa33",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#dde2f3",
+                        "surface-container-low": "#fef2de",
+                        "primary-fixed": "#ffdcbe",
+                        "surface-variant": "#ede1cd",
+                        "error": "#ba1a1a",
+                        "secondary": "#855400",
+                        "surface-container-high": "#f3e7d3",
+                        "tertiary-container": "#565c6a",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb870",
+                        "on-primary-fixed": "#2d1600",
+                        "background": "#fff8f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 bg-background/95 backdrop-blur-md border-b border-outline-variant dark:border-outline">
+<div class="font-display-lg text-display-lg font-bold text-primary dark:text-inverse-primary">Altyn</div>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Market Data</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Transfers</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary dark:border-inverse-primary pb-1 font-body-md text-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Reserves</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Support</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="font-label-lg text-label-lg text-secondary border border-secondary px-4 py-2 rounded">Open Account</button>
+<button class="font-label-lg text-label-lg text-on-primary bg-primary bg-gradient-to-b from-primary-fixed-dim to-primary px-4 py-2 rounded shadow-[inset_0_-2px_4px_rgba(0,0,0,0.2)]">Secure Login</button>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap flex flex-col gap-section-gap">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="flex flex-col gap-base">
+<h1 class="font-display-lg text-display-lg text-primary">Sovereign Proof of Reserve</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    Altyn State Gold Treasury operates with absolute transparency. Every digital holding is fully backed by physical gold secured within our sovereign vaults. Verify the integrity of our reserves in real-time.
+                </p>
+<div class="mt-4 flex gap-4">
+<div class="bg-surface-container border border-outline-variant p-4 rounded-lg flex flex-col gap-2 min-w-[200px]">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Verified Reserves</span>
+<span class="font-headline-lg text-headline-lg text-primary">560.42 t</span>
+</div>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(133,79,11,0.12)] border border-outline-variant h-[400px]">
+<img alt="Physical Gold Reserves" class="w-full h-full object-cover" data-alt="A highly detailed close-up shot of stacks of gleaming physical gold bullion bars arranged meticulously inside a highly secure state treasury vault. The lighting is focused and dramatic, highlighting the stamped purity marks and serial numbers on the metallic surface, reflecting a rich amber and deep navy color palette. The mood conveys immense wealth, unshakeable stability, and elite institutional security." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Bm-YpViVaRa87GpQFZpJCsWlFVCM82HSnYtDAQ-7J246g37fQnIcRhS9Qo1fEzmu3FfY2EOtQfbL36QwL7IfSeDxNBgyrsZZeMRpn2jfrpYMRY_i6aZACxX14kAiHcUXwUVJuMtjBe2Nh2voRPyWHuj_4un6u8LC1I1Ir-FQt5szY6uP3KFDVRHe065qF9iTC8kWDdRBkRfXJftN-qr7fRSa-FpvhiHzQRqBnTuJzf6YrRwJ2wTUYr5C_KbRW3n0g9HaAwDtY94"/>
+</div>
+</section>
+<!-- Proof of Reserve Tool -->
+<section class="bg-surface-container-low border border-outline-variant rounded-xl p-gutter shadow-[0_4px_20px_rgba(133,79,11,0.06)] flex flex-col gap-gutter">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-outline-variant pb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Live Reserve Verification</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Query the blockchain and cross-reference with vault serial numbers.</p>
+</div>
+<div class="bg-surface-container border border-primary/20 px-3 py-1.5 rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-label-md text-label-md text-primary">System Status: Active</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="md:col-span-2 flex flex-col gap-4">
+<div class="flex gap-2">
+<input class="flex-grow bg-surface border-outline/20 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded font-body-md text-body-md text-on-surface placeholder-on-surface-variant/50 p-3" placeholder="Enter Asset ID or Vault Serial Number..." type="text"/>
+<button class="font-label-lg text-label-lg text-on-primary bg-primary bg-gradient-to-b from-primary-fixed-dim to-primary px-6 py-3 rounded shadow-[inset_0_-2px_4px_rgba(0,0,0,0.2)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">search</span>
+                            Verify
+                        </button>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-4 font-mono text-sm text-on-surface-variant h-48 overflow-y-auto">
+<div class="text-on-surface-variant/50 mb-2">&gt;&gt; System ready. Awaiting query...</div>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-4 flex flex-col gap-4">
+<h3 class="font-label-lg text-label-lg text-on-surface">Recent Audits</h3>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center justify-between group cursor-pointer p-2 hover:bg-surface-container rounded transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">description</span>
+<span class="font-body-md text-body-md text-on-surface">Q3 2024 Independent Audit</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer p-2 hover:bg-surface-container rounded transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">description</span>
+<span class="font-body-md text-body-md text-on-surface">Q2 2024 Independent Audit</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer p-2 hover:bg-surface-container rounded transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">description</span>
+<span class="font-body-md text-body-md text-on-surface">Q1 2024 Independent Audit</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px] opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Vault Locations Map -->
+<section class="flex flex-col gap-gutter">
+<h2 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-2">Secure Vault Infrastructure</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-3 h-[400px] bg-surface-container-high rounded-xl overflow-hidden border border-outline-variant relative">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1200&amp;q=80')] bg-cover bg-center opacity-40 mix-blend-luminosity" data-alt="A stylized, high-contrast, minimalist map visualization of the globe focused on central Asia, rendered in deep navy and subtle cream tones. The map features glowing amber nodes representing secure vault locations, connected by faint, precise vector lines symbolizing secure data and asset transfers. The overall aesthetic is corporate, modern, and highly secure."></div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+<div class="relative">
+<div class="w-4 h-4 bg-primary rounded-full animate-ping absolute top-0 left-0 opacity-75"></div>
+<div class="w-4 h-4 bg-primary rounded-full relative z-10 border-2 border-surface"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-container p-4 border border-outline-variant rounded-lg">
+<h4 class="font-label-lg text-label-lg text-primary mb-1">Primary Depository</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Bishkek Central Vault</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+<span class="font-label-md text-label-md text-on-surface">Active &amp; Secured</span>
+</div>
+</div>
+<div class="bg-surface p-4 border border-outline-variant rounded-lg opacity-70">
+<h4 class="font-label-lg text-label-lg text-on-surface-variant mb-1">Secondary Redundancy</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Classified Location Alpha</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-base px-margin-desktop mt-section-gap flex flex-col md:flex-row justify-between items-center gap-base bg-surface-container-high dark:bg-inverse-surface">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">Altyn</div>
+<div class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant">© 2024 Altyn State Gold Treasury. Regulated by the National Bank of the Kyrgyz Republic.</div>
+<div class="flex gap-4">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Security Protocol</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Public Disclosures</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Contact Treasury</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:7
+    container_name: altyn-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: altyn_admin
+      MONGO_INITDB_ROOT_PASSWORD: altyn_secure_2026
+      MONGO_INITDB_DATABASE: altyn
+    volumes:
+      - mongo_data:/data/db
+      - ./server/scripts/seed.js:/docker-entrypoint-initdb.d/seed.js:ro
+    networks:
+      - altyn-network
+
+  # Express API Backend
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: altyn-backend
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      MONGODB_URI: mongodb://altyn_admin:altyn_secure_2026@mongo:27017/altyn?authSource=admin
+      JWT_SECRET: altyn-gold-platform-secret-key-2026
+      NODE_ENV: production
+    depends_on:
+      - mongo
+    networks:
+      - altyn-network
+
+  # React Frontend (Vite production build served by nginx)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: altyn-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - altyn-network
+
+volumes:
+  mongo_data:
+
+networks:
+  altyn-network:
+    driver: bridge

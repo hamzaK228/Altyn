@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Altyn - Transaction Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#88520e",
+                        "outline": "#847467",
+                        "inverse-on-surface": "#fbefdb",
+                        "on-primary-container": "#ffca99",
+                        "tertiary-fixed-dim": "#c1c6d7",
+                        "primary": "#663a00",
+                        "surface": "#fff8f1",
+                        "on-tertiary-container": "#cfd5e5",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary": "#3f4552",
+                        "secondary-fixed-dim": "#ffb95d",
+                        "on-background": "#201b0f",
+                        "secondary-fixed": "#ffddb7",
+                        "on-primary-fixed-variant": "#693c00",
+                        "on-tertiary-fixed-variant": "#414754",
+                        "on-tertiary-fixed": "#161c27",
+                        "primary-container": "#854f0b",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#524438",
+                        "surface-container-highest": "#ede1cd",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#d6c3b3",
+                        "on-surface": "#201b0f",
+                        "surface-bright": "#fff8f1",
+                        "on-secondary-container": "#6b4200",
+                        "inverse-surface": "#363022",
+                        "surface-dim": "#e4d9c5",
+                        "surface-container": "#f8ecd8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb870",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fcaa33",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#dde2f3",
+                        "surface-container-low": "#fef2de",
+                        "primary-fixed": "#ffdcbe",
+                        "surface-variant": "#ede1cd",
+                        "error": "#ba1a1a",
+                        "secondary": "#855400",
+                        "surface-container-high": "#f3e7d3",
+                        "tertiary-container": "#565c6a",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb870",
+                        "on-primary-fixed": "#2d1600",
+                        "background": "#fff8f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 bg-background/95 backdrop-blur-md border-b border-outline-variant dark:border-outline flat no shadows">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-display-lg font-bold text-primary dark:text-inverse-primary">Altyn</span>
+<div class="hidden md:flex items-center gap-6 mt-2">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Market Data</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary dark:border-inverse-primary pb-1 hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md Active: opacity-80 transition-opacity" href="#">Transfers</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Reserves</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors font-body-md text-body-md" href="#">Support</a>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<button class="font-label-lg text-label-lg border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary/5 transition-colors">Secure Login</button>
+<button class="font-label-lg text-label-lg bg-primary text-on-primary px-4 py-2 rounded-lg hover:opacity-90 transition-opacity shadow-[0_2px_4px_rgba(133,79,11,0.2)]">Open Account</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-section-gap flex-grow flex flex-col gap-12">
+<!-- Header -->
+<header class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Secure Transfer &amp; Withdrawal</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Manage the movement of your sovereign-backed assets. All transactions are cryptographically verified and recorded in the state treasury ledger.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Transfer Form -->
+<div class="col-span-1 md:col-span-8 flex flex-col gap-6">
+<div class="bg-surface rounded-xl border border-outline-variant shadow-[0_4px_16px_rgba(133,79,11,0.06)] overflow-hidden">
+<!-- Tabs -->
+<div class="flex border-b border-outline-variant bg-surface-container-lowest">
+<button class="flex-1 py-4 font-label-lg text-label-lg text-primary border-b-2 border-primary bg-surface flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 20px;">swap_horiz</span>
+                            Internal Transfer
+                        </button>
+<button class="flex-1 py-4 font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 20px;">account_balance</span>
+                            Bank Withdrawal
+                        </button>
+</div>
+<!-- Form Area -->
+<div class="p-8 flex flex-col gap-6">
+<!-- Recipient -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Recipient Altyn ID or Vault Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-size: 20px;">badge</span>
+<input class="w-full bg-surface-container-lowest border border-outline/30 rounded-lg py-3 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant" placeholder="e.g., ALTYN-9482-XXXX" type="text"/>
+</div>
+</div>
+<!-- Amount & Asset Type -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2 flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Transfer Amount</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline/30 rounded-lg py-3 px-4 text-on-surface font-body-lg text-body-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" placeholder="0.00" type="number"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 font-label-md text-label-md text-primary bg-primary/10 px-2 py-1 rounded hover:bg-primary/20 transition-colors">MAX</button>
+</div>
+</div>
+<div class="md:col-span-1 flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Asset Type</label>
+<select class="w-full bg-surface-container-lowest border border-outline/30 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none">
+<option>Gold (XAU)</option>
+<option>USD Fiat</option>
+</select>
+</div>
+</div>
+<!-- Description -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Secure Memo (Optional)</label>
+<input class="w-full bg-surface-container-lowest border border-outline/30 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant" placeholder="Purpose of transfer..." type="text"/>
+</div>
+<!-- Divider -->
+<hr class="border-outline-variant my-2"/>
+<!-- Action -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Estimated Network Fee</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">0.0015 XAU</span>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg py-3 px-8 rounded-lg shadow-[0_4px_12px_rgba(102,58,0,0.3)] hover:opacity-90 hover:shadow-lg active:translate-y-[1px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 20px;">lock</span>
+                                Authorize Transfer
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Info & Limits -->
+<div class="col-span-1 md:col-span-4 flex flex-col gap-6">
+<!-- Limits Card -->
+<div class="bg-surface rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md text-on-surface border-b border-outline-variant pb-2">Account Limits</h3>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Daily Limit</span>
+<span class="font-label-lg text-label-lg text-on-surface">50.00 XAU</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 12%"></div>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Used: 6.00 XAU</span>
+<span class="font-label-md text-label-md text-primary">Remaining: 44.00 XAU</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 mt-2">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Monthly Limit</span>
+<span class="font-label-lg text-label-lg text-on-surface">500.00 XAU</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Used: 225.00 XAU</span>
+<span class="font-label-md text-label-md text-primary">Remaining: 275.00 XAU</span>
+</div>
+</div>
+</div>
+<!-- Security Assurance Card with Image -->
+<div class="bg-surface-container-high rounded-xl border border-outline-variant p-6 relative overflow-hidden flex flex-col gap-2 min-h-[160px]">
+<img alt="" class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-multiply z-0 pointer-events-none" data-alt="A highly detailed, abstract macro photograph of complex, interwoven geometric security patterns etched into a solid gold surface. The lighting is cinematic and high-key, creating a pristine, light-mode modern corporate aesthetic. The visual style relies on deep amber and primary gold tones against a creamy white background, evoking the absolute security and high-end heritage of a state treasury vault. The mood is impenetrable and flawlessly structured." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Ixd26fa4Jd5siprss2s3w50UeZStzFIOKhKNZf7NRD22VLttL2q_NruglVl2SGi9om_a30-aSZbZtzia3qv2fCAqkPxzL8q5I8pCKKIfq52zgOSYp-cRsEsr1L8AZN-R1IeoeXIFd8GyQCEZ6zfR9t_FRdU_Nd6TOefVjMbA6gbL9Rj5CbUWWkMTCQm6_L4CJJdcFB3GXeI3dEBUa8sLPPTRg3q1G_llWFNDVTgz7997lNNcVZTmeap_ooayDaYrkeqK6iSO4CI"/>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined fill">verified_user</span>
+<span class="font-label-lg text-label-lg">State Treasury Security</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">All out-bound transfers are subject to rigorous AML protocols and require multi-factor cryptographic authorization.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Transactions Table -->
+<section class="flex flex-col gap-4 mt-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Recent Transfers</h2>
+<div class="bg-surface rounded-xl border border-outline-variant overflow-x-auto shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-outline-variant">
+<th class="py-4 px-6 font-label-lg text-label-lg text-on-surface-variant font-medium">Date</th>
+<th class="py-4 px-6 font-label-lg text-label-lg text-on-surface-variant font-medium">Type</th>
+<th class="py-4 px-6 font-label-lg text-label-lg text-on-surface-variant font-medium">Recipient / Details</th>
+<th class="py-4 px-6 font-label-lg text-label-lg text-on-surface-variant font-medium text-right">Amount</th>
+<th class="py-4 px-6 font-label-lg text-label-lg text-on-surface-variant font-medium text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">Oct 24, 2023</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" style="font-size: 18px;">call_made</span>
+<span class="font-body-md text-body-md text-on-surface">Internal</span>
+</div>
+</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">ALTYN-7732-BXV1</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface font-medium text-right">-2.500 XAU</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block bg-surface-dim text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-full border border-outline-variant">Completed</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">Oct 21, 2023</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" style="font-size: 18px;">account_balance</span>
+<span class="font-body-md text-body-md text-on-surface">Withdrawal</span>
+</div>
+</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">Swiss National Bank ending *4092</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface font-medium text-right">-15.000 XAU</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block bg-secondary-container/20 text-on-secondary-container font-label-md text-label-md px-3 py-1 rounded-full border border-secondary-container/30">Pending</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">Oct 15, 2023</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" style="font-size: 18px;">call_received</span>
+<span class="font-body-md text-body-md text-on-surface">Deposit</span>
+</div>
+</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">State Mining Corp.</td>
+<td class="py-4 px-6 font-body-md text-body-md text-primary font-medium text-right">+10.000 XAU</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block bg-surface-dim text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-full border border-outline-variant">Completed</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">Oct 02, 2023</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" style="font-size: 18px;">call_made</span>
+<span class="font-body-md text-body-md text-on-surface">Internal</span>
+</div>
+</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface">ALTYN-2291-KLP9</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface font-medium text-right">-1.000 XAU</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block bg-error-container text-on-error-container font-label-md text-label-md px-3 py-1 rounded-full border border-error-container">Cancelled</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex justify-end mt-2">
+<button class="font-label-lg text-label-lg text-primary hover:underline flex items-center gap-1">
+                    View Full Statement
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-base px-margin-desktop mt-section-gap flex flex-col md:flex-row justify-between items-center gap-base bg-surface-container-high dark:bg-inverse-surface flat no shadows">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">
+            Altyn
+        </div>
+<div class="flex flex-wrap items-center gap-6 justify-center">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Security Protocol</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Public Disclosures</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Contact Treasury</a>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant text-center md:text-right">
+            © 2024 Altyn State Gold Treasury. Regulated by the National Bank of the Kyrgyz Republic.
+        </div>
+</footer>
+</body></html>
