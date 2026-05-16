@@ -18,7 +18,14 @@
     "lucide-react": "^0.354.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "express": "^4.18.3",
+    "cors": "^2.8.5",
+    "mongoose": "^8.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "zod": "^3.22.4",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
@@ -34,6 +41,10 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/bcryptjs": "^2.4.6"
   }
 }
