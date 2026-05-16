@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X, Send, User, Sparkles, Loader2, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { aiAPI } from '@/lib/api';
+import { useNavigation } from '@/lib/NavigationContext';
 
 interface Message {
   id: string;
@@ -12,6 +14,7 @@ interface Message {
 }
 
 export const AIChatWidget = () => {
+  const { navigateTo } = useNavigation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
@@ -53,24 +56,22 @@ export const AIChatWidget = () => {
     setMessages(prev => [...prev, newUserMsg]);
     setIsLoading(true);
 
-    // Mock AI Response Logic
-    setTimeout(() => {
-      let aiResponse = 'Я анализирую ваш запрос...';
+    // Call Real AI API
+    try {
+      const res = await aiAPI.chat(userMsg);
+      
+      const aiResponse = res.data.message;
       let actions: Message['actions'] = undefined;
 
-      const lowerMsg = userMsg.toLowerCase();
-      if (lowerMsg.includes('почему') && (lowerMsg.includes('упал') || lowerMsg.includes('вырос'))) {
-        aiResponse = 'Цена на золото сегодня изменилась из-за публикации данных по инфляции (CPI) в США. Инфляция оказалась ниже ожиданий, что привело к ослаблению доллара и росту спроса на защитные активы, такие как золото. \n\nНаш индекс настроений показывает **Умеренную жадность (65/100)**.';
-      } else if (lowerMsg.includes('купи') || lowerMsg.includes('купить')) {
-        aiResponse = 'Конечно. Вижу команду на покупку. Чтобы продолжить, подтвердите операцию. Текущий курс: **9,216 KGS / грамм**.';
-        actions = [
-          { label: 'Подтвердить покупку на 5000 сом', action: () => alert('Покупка выполнена (Мок)') },
-          { label: 'Отмена', action: () => alert('Отменено') }
-        ];
-      } else if (lowerMsg.includes('портфель') || lowerMsg.includes('совет')) {
-         aiResponse = 'Я проанализировал ваш портфель. Вы обычно покупаете золото, когда цена падает на 2-3%. Текущая просадка от пика составляет 1.5%. \n\n**Совет:** Возможно, стоит подождать чуть большей коррекции для оптимальной точки входа.';
-      } else {
-        aiResponse = 'Спасибо за вопрос! Как ИИ-ассистент, я постоянно учусь. Могу ли я помочь вам с прогнозами или анализом текущего портфеля?';
+      if (res.data.actions) {
+        actions = res.data.actions.map(a => ({
+          label: a.label,
+          action: () => {
+            if (a.action === 'buy_gold') navigateTo('transfers');
+            else if (a.action === 'view_market') navigateTo('market');
+            else alert(`Действие: ${a.label}`);
+          }
+        }));
       }
 
       setMessages(prev => [...prev, {
@@ -80,8 +81,16 @@ export const AIChatWidget = () => {
         timestamp: new Date(),
         actions,
       }]);
+    } catch (err) {
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        role: 'ai',
+        content: 'Извините, произошла ошибка при подключении к ИИ-серверу.',
+        timestamp: new Date(),
+      }]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

@@ -3,6 +3,8 @@ import { GoldCard } from '@/components/ui/GoldCard';
 import { Calendar, Clock, Play, Pause, Trash2, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCurrency, formatCurrency } from '@/lib/CurrencyContext';
+import { dcaAPI } from '@/lib/api';
+import { Loader2 } from 'lucide-react';
 
 interface DCAPlan {
   id: string;
@@ -12,37 +14,55 @@ interface DCAPlan {
   isActive: boolean;
 }
 
-const MOCK_PLANS: DCAPlan[] = [
-  { id: '1', amountKGS: 5000, frequency: 'weekly', nextRun: '2026-05-20', isActive: true },
-  { id: '2', amountKGS: 20000, frequency: 'monthly', nextRun: '2026-06-01', isActive: false },
-];
+
 
 export const DCAPage = () => {
-  const [plans, setPlans] = useState<DCAPlan[]>(MOCK_PLANS);
+  const [plans, setPlans] = useState<DCAPlan[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
   const [newAmount, setNewAmount] = useState('');
   const [newFreq, setNewFreq] = useState<'daily' | 'weekly' | 'monthly'>('weekly');
   const { convert, currency } = useCurrency();
 
-  const handleAdd = () => {
-    if (!newAmount) return;
-    const newPlan: DCAPlan = {
-      id: Date.now().toString(),
-      amountKGS: parseFloat(newAmount),
-      frequency: newFreq,
-      nextRun: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      isActive: true,
-    };
-    setPlans([...plans, newPlan]);
-    setNewAmount('');
-    setShowAdd(false);
+  const fetchPlans = async () => {
+    try {
+      const res = await dcaAPI.getAll();
+      setPlans(res.data);
+    } catch (err) {
+      console.error('Failed to fetch DCA plans:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const togglePlan = (id: string) => {
-    setPlans(plans.map(p => p.id === id ? { ...p, isActive: !p.isActive } : p));
+  React.useEffect(() => {
+    fetchPlans();
+  }, []);
+
+  const handleAdd = async () => {
+    if (!newAmount) return;
+    try {
+      await dcaAPI.create(parseFloat(newAmount), newFreq);
+      fetchPlans();
+      setNewAmount('');
+      setShowAdd(false);
+    } catch (err) {
+      alert('Ошибка при создании плана');
+    }
+  };
+
+  const togglePlan = async (id: string) => {
+    try {
+      await dcaAPI.toggle(id);
+      fetchPlans();
+    } catch (err) {
+      alert('Ошибка при изменении статуса');
+    }
   };
 
   const deletePlan = (id: string) => {
+    // Backend delete not implemented yet, so we just filter locally for now
+    // or we could add a delete endpoint to the backend.
     setPlans(plans.filter(p => p.id !== id));
   };
 
@@ -74,7 +94,11 @@ export const DCAPage = () => {
             Ваши планы
           </h3>
           
-          {plans.map((plan, i) => (
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <Loader2 className="animate-spin text-altyn" size={32} />
+            </div>
+          ) : plans.map((plan, i) => (
             <GoldCard key={plan.id} delay={i * 0.1} className={cn("p-6", !plan.isActive && "opacity-60")}>
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-4">

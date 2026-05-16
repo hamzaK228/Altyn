@@ -155,21 +155,20 @@ app.use('/api/ai', aiRoutes);
 // Error Handler
 app.use(errorHandler);
 
-// Start Server
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  const start = async () => {
-    // Try MongoDB, fallback to in-memory
-    await connectDB();
+// Database Connection Initialization
+const dbPromise = connectDB();
 
+// Start Server (only for non-Vercel environments)
+if (!process.env.VERCEL) {
+  dbPromise.then(() => {
     app.listen(PORT, () => {
       logger.info(`Altyn API server running on http://localhost:${PORT}`, { port: PORT });
     });
-  };
-
-  start().catch((error) => {
+  }).catch((error) => {
     logger.error('Failed to start server', error as Error);
     process.exit(1);
   });
 }
+
 
 export default app;

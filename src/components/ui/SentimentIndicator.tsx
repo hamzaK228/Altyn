@@ -1,14 +1,47 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Newspaper, Rss } from 'lucide-react';
+import { Newspaper, Rss, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { aiAPI } from '@/lib/api';
+import { GoldCard } from './GoldCard';
 
 interface SentimentIndicatorProps {
   className?: string;
 }
 
 export const SentimentIndicator = ({ className }: SentimentIndicatorProps) => {
-  const score = 68; // 0 to 100
+  const [data, setData] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchSentiment = async () => {
+      try {
+        const res = await aiAPI.getSentiment();
+        setData(res.data);
+      } catch (err) {
+        console.error('Sentiment fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSentiment();
+  }, []);
+
+  if (loading) {
+    return (
+      <GoldCard className={cn("flex items-center justify-center min-h-[300px]", className)}>
+        <Loader2 className="animate-spin text-altyn" size={32} />
+      </GoldCard>
+    );
+  }
+
+  const s = data || {
+    index: 50,
+    label: 'Нейтрально',
+    newsSources: []
+  };
+
+  const score = s.index;
   const angle = (score / 100) * 180 - 90; // Map 0-100 to -90 to 90 degrees
 
   return (
@@ -62,7 +95,12 @@ export const SentimentIndicator = ({ className }: SentimentIndicatorProps) => {
         
         <div className="mt-4 text-center">
           <div className="text-3xl font-bold dark:text-white">{score}</div>
-          <div className="text-sm font-semibold text-green-500 uppercase tracking-wider mt-1">Жадность</div>
+          <div className={cn(
+            "text-sm font-semibold uppercase tracking-wider mt-1",
+            score > 60 ? "text-green-500" : score < 40 ? "text-red-500" : "text-yellow-500"
+          )}>
+            {s.label}
+          </div>
         </div>
       </div>
 
@@ -71,21 +109,17 @@ export const SentimentIndicator = ({ className }: SentimentIndicatorProps) => {
           <Newspaper size={14} /> Последние сигналы
         </h4>
         <div className="space-y-3">
-          {[
-            { text: 'Золото привлекает инвесторов как защитный актив', sentiment: 'positive', time: '1ч назад' },
-            { text: 'Аналитики предсказывают рост цен до $2,500', sentiment: 'positive', time: '3ч назад' },
-            { text: 'Рост доходности гособлигаций оказывает давление', sentiment: 'negative', time: '5ч назад' }
-          ].map((news, i) => (
+          {s.newsSources.map((news: any, i: number) => (
             <div key={i} className="flex flex-col gap-1 pb-3 border-b border-gray-100 dark:border-white/5 last:border-0 last:pb-0">
               <div className="flex justify-between items-start gap-4">
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-snug">{news.text}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-snug">{news.title || news.text}</p>
                 <span className={cn(
                   "shrink-0 w-2 h-2 rounded-full mt-1.5",
                   news.sentiment === 'positive' ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]" : 
                   news.sentiment === 'negative' ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" : "bg-gray-300"
                 )} />
               </div>
-              <span className="text-[10px] text-gray-400">{news.time}</span>
+              <span className="text-[10px] text-gray-400">{news.source || 'Новости'}</span>
             </div>
           ))}
         </div>

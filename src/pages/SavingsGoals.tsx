@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoldCard } from '@/components/ui/GoldCard';
-import { Plus, Target, Home, Car, GraduationCap, Trash2 } from 'lucide-react';
+import { Plus, Target, Home, Car, GraduationCap, Trash2, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { savingsAPI } from '@/lib/api';
 
 interface Goal {
   id: string;
@@ -13,36 +14,52 @@ interface Goal {
   color: string;
 }
 
-const MOCK_GOALS: Goal[] = [
-  { id: '1', name: 'Квартира в Бишкеке', targetWeightG: 5000, currentWeightG: 1250, icon: Home, color: 'text-blue-500' },
-  { id: '2', name: 'Новый автомобиль', targetWeightG: 1500, currentWeightG: 450, icon: Car, color: 'text-green-500' },
-  { id: '3', name: 'Образование детей', targetWeightG: 2000, currentWeightG: 200, icon: GraduationCap, color: 'text-purple-500' },
-];
+
 
 export const SavingsGoals = () => {
-  const [goals, setGoals] = useState<Goal[]>(MOCK_GOALS);
+  const [goals, setGoals] = useState<Goal[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
   const [newName, setNewName] = useState('');
   const [newTarget, setNewTarget] = useState('');
+
+  const fetchGoals = async () => {
+    try {
+      const res = await savingsAPI.getAll();
+      setGoals(res.data.map((g: any) => ({
+        ...g,
+        icon: g.name.toLowerCase().includes('дом') || g.name.toLowerCase().includes('квартира') ? Home : 
+              g.name.toLowerCase().includes('машина') || g.name.toLowerCase().includes('авто') ? Car : 
+              g.name.toLowerCase().includes('учеба') || g.name.toLowerCase().includes('школа') ? GraduationCap : Target,
+        color: g.name.toLowerCase().includes('дом') ? 'text-blue-500' : 
+               g.name.toLowerCase().includes('машина') ? 'text-green-500' : 'text-altyn-light'
+      })));
+    } catch (err) {
+      console.error('Failed to fetch goals:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchGoals();
+  }, []);
 
   const handleDelete = (id: string) => {
     setGoals(goals.filter(g => g.id !== id));
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     if (!newName || !newTarget) return;
-    const newGoal: Goal = {
-      id: Date.now().toString(),
-      name: newName,
-      targetWeightG: parseFloat(newTarget),
-      currentWeightG: 0,
-      icon: Target,
-      color: 'text-altyn-light',
-    };
-    setGoals([...goals, newGoal]);
-    setNewName('');
-    setNewTarget('');
-    setShowAdd(false);
+    try {
+      await savingsAPI.create(newName, parseFloat(newTarget));
+      fetchGoals();
+      setNewName('');
+      setNewTarget('');
+      setShowAdd(false);
+    } catch (err) {
+      alert('Ошибка при создании цели');
+    }
   };
 
   return (
@@ -62,7 +79,11 @@ export const SavingsGoals = () => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {goals.map((goal, i) => {
+        {loading ? (
+          <div className="col-span-full flex justify-center py-20">
+            <Loader2 className="animate-spin text-altyn" size={32} />
+          </div>
+        ) : goals.map((goal, i) => {
           const percent = (goal.currentWeightG / goal.targetWeightG) * 100;
           return (
             <GoldCard key={goal.id} delay={i * 0.1} className="relative group overflow-hidden">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from '@/components/ui/Sidebar';
 import { GoldCard } from '@/components/ui/GoldCard';
-import { User, Shield, Bell, CreditCard, LogOut, Check, X } from 'lucide-react';
+import { User, Shield, Bell, CreditCard, LogOut, Check, X, ScanFace, Upload } from 'lucide-react';
 import { useNavigation } from '@/lib/NavigationContext';
 import { authAPI } from '@/lib/api';
 import { cn } from '@/lib/utils';
@@ -90,6 +90,27 @@ export const SettingsPage = () => {
             </div>
 
             <div className="space-y-8">
+              <section>
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-gray-500 flex items-center gap-2">
+                    <ScanFace size={16} className="text-altyn-light" /> AI Верификация (KYC)
+                  </h4>
+                  <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-green-500/10 text-green-500">Пройдена</span>
+                </div>
+                <div className="p-6 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
+                  <div className="w-16 h-16 rounded-full bg-altyn/10 flex items-center justify-center text-altyn shrink-0">
+                    <Shield size={24} />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h5 className="font-bold text-sm">Умный профиль защищен</h5>
+                    <p className="text-xs text-gray-500 mt-1">Документы проверены нейросетью. Риск-скоринг: Низкий (фрод-факторов не обнаружено).</p>
+                  </div>
+                  <button className="outline-button !py-2 !px-4 text-xs shrink-0 flex gap-2 items-center">
+                    <Upload size={14} /> Обновить документы
+                  </button>
+                </div>
+              </section>
+
               <section>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-6 flex items-center gap-2">
                   <Shield size={16} className="text-altyn-light" /> Безопасность и сессии

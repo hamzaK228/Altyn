@@ -3,6 +3,8 @@ import { GoldCard } from '@/components/ui/GoldCard';
 import { useNavigation } from '@/lib/NavigationContext';
 import { goldAPI } from '@/lib/api';
 import { AdvancedChart } from '@/components/ui/AdvancedChart';
+import { MarketForecastCard } from '@/components/ui/MarketForecastCard';
+import { SentimentIndicator } from '@/components/ui/SentimentIndicator';
 import { useTheme } from '@/lib/ThemeContext';
 import { useCurrency, formatCurrency } from '@/lib/CurrencyContext';
 import { Bell, TrendingUp, Shield } from 'lucide-react';
@@ -46,8 +48,6 @@ export const MarketData = () => {
         setStats(statsRes.data);
       } catch (err) {
         console.error('Market fetch error:', err);
-      } finally {
-        setLoading(false);
       }
     };
     
@@ -181,26 +181,8 @@ export const MarketData = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <GoldCard className="p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <TrendingUp size={20} className="text-altyn-light" />
-            <h4 className="text-lg font-bold">Влияние инфляции</h4>
-          </div>
-          <p className="text-sm text-slate-500 dark:text-gray-400 leading-relaxed mb-6">
-            Золото является историческим хеджем против инфляции. В 2024 году золото показало доходность +14.2% при инфляции в 8.4%.
-          </p>
-          <button onClick={() => navigateTo('reserves')} className="text-altyn-light text-xs font-bold hover:underline">Подробнее о резервах →</button>
-        </GoldCard>
-        <GoldCard className="p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <Shield size={20} className="text-altyn-light" />
-            <h4 className="text-lg font-bold">Прогноз Нацбанка</h4>
-          </div>
-          <p className="text-sm text-slate-500 dark:text-gray-400 leading-relaxed mb-6">
-            Ожидается стабильный рост спроса на физическое золото со стороны центральных банков развивающихся стран.
-          </p>
-          <button onClick={() => navigateTo('support')} className="text-altyn-light text-xs font-bold hover:underline">Читать аналитику →</button>
-        </GoldCard>
+        <MarketForecastCard />
+        <SentimentIndicator />
       </div>
     </div>
   );

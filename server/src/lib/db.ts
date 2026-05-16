@@ -11,7 +11,9 @@ export async function connectDB(): Promise<boolean> {
   }
 
   try {
-    await mongoose.connect(uri);
+    await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+    });
     logger.info('MongoDB connected', { database: uri.split('/').pop()?.split('?')[0] });
     return true;
   } catch (error) {

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { GoldCard } from '@/components/ui/GoldCard';
-import { Package, Landmark, Info, ShieldCheck } from 'lucide-react';
+import { Package, Landmark, Info, ShieldCheck, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { withdrawAPI, portfolioAPI } from '@/lib/api';
+import { useCurrency, formatCurrency } from '@/lib/CurrencyContext';
 
 const GoldBarIcon = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => (
   <div className={cn(
@@ -24,14 +26,34 @@ const BARS = [
 export const WithdrawGold = () => {
   const [selectedWeight, setSelectedWeight] = useState<number | null>(null);
   const [method, setMethod] = useState<'pickup' | 'delivery'>('pickup');
+  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [goldPrice, setGoldPrice] = useState(0);
+  const { convert, currency } = useCurrency();
 
-  const handleOrder = () => {
-    setSuccess(true);
-    setTimeout(() => {
-      setSuccess(false);
-      setSelectedWeight(null);
-    }, 4000);
+  React.useEffect(() => {
+    const fetchPrice = async () => {
+      try {
+        const res = await portfolioAPI.get();
+        setGoldPrice(res.data.currentGoldPrice);
+      } catch (err) {}
+    };
+    fetchPrice();
+  }, []);
+
+  const handleOrder = async () => {
+    if (!selectedWeight) return;
+    setIsLoading(true);
+    try {
+      // Calculate KGS amount based on weight and current price
+      const kgsAmount = selectedWeight * goldPrice;
+      await withdrawAPI.create(kgsAmount, method === 'delivery' ? 'User Address' : undefined, method === 'pickup' ? 'Main Branch' : undefined);
+      setSuccess(true);
+    } catch (err) {
+      alert('Ошибка при оформлении заявки');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -163,9 +185,10 @@ export const WithdrawGold = () => {
 
               <button 
                 onClick={handleOrder}
-                disabled={!selectedWeight}
-                className="w-full gold-button py-4 disabled:opacity-50 disabled:grayscale transition-all"
+                disabled={!selectedWeight || isLoading}
+                className="w-full gold-button py-4 disabled:opacity-50 disabled:grayscale transition-all flex items-center justify-center gap-2"
               >
+                {isLoading && <Loader2 size={18} className="animate-spin" />}
                 Оформить заявку
               </button>
 

@@ -5,15 +5,16 @@ Government-backed gold investment platform for Kyrgyzstan.
 ## Quick Start (Development)
 
 ```bash
-# Frontend (Terminal 1)
+# Install all dependencies (Frontend & Backend)
 npm install
-npm run dev          # → http://localhost:5173
+cd server && npm install && cd ..
 
-# Backend (Terminal 2)
-cd server
-npm install
-npm run dev          # → http://localhost:3001
+# Run Full Stack (Frontend + Backend) concurrently
+npm run dev
 ```
+- **Frontend:** http://localhost:5173
+- **Backend:** http://localhost:3001 (Proxied via /api)
+
 
 ## Quick Start (Docker — Full Stack)
 

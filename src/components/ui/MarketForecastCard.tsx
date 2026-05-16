@@ -1,13 +1,50 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, ArrowRight, Activity, BrainCircuit } from 'lucide-react';
+import { TrendingUp, TrendingDown, ArrowRight, Activity, BrainCircuit, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { aiAPI } from '@/lib/api';
 
 interface MarketForecastCardProps {
   className?: string;
 }
 
 export const MarketForecastCard = ({ className }: MarketForecastCardProps) => {
+  const [data, setData] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchForecast = async () => {
+      try {
+        const res = await aiAPI.getForecast();
+        setData(res.data);
+      } catch (err) {
+        console.error('Forecast fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchForecast();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={cn("bg-white dark:bg-[#0a0a0f] border border-gray-100 dark:border-white/5 rounded-3xl p-6 shadow-sm flex items-center justify-center min-h-[300px]", className)}>
+        <Loader2 className="animate-spin text-altyn" size={32} />
+      </div>
+    );
+  }
+
+  const d = data || {
+    trend: 'bullish',
+    predictedRange: { max: 9450 },
+    confidenceScore: 78,
+    factors: [
+      { text: 'Ожидаемое снижение ставки ФРС в следующем месяце', positive: true },
+      { text: 'Рекордные закупки золота Центральными банками', positive: true },
+      { text: 'Укрепление доллара на фоне данных по занятости', positive: false }
+    ]
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -26,9 +63,12 @@ export const MarketForecastCard = ({ className }: MarketForecastCardProps) => {
             <p className="text-xs text-gray-500">На основе 10-летних данных</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 dark:bg-green-500/10 text-green-600 rounded-full text-xs font-semibold">
-          <TrendingUp size={14} />
-          Бычий тренд
+        <div className={cn(
+          "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold",
+          d.trend === 'bullish' ? "bg-green-50 dark:bg-green-500/10 text-green-600" : "bg-red-50 dark:bg-red-500/10 text-red-600"
+        )}>
+          {d.trend === 'bullish' ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+          {d.trend === 'bullish' ? 'Бычий тренд' : 'Медвежий тренд'}
         </div>
       </div>
 
@@ -36,23 +76,24 @@ export const MarketForecastCard = ({ className }: MarketForecastCardProps) => {
         <div className="p-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
           <p className="text-xs text-gray-500 mb-1">Прогноз на 30 дней</p>
           <div className="flex items-end gap-2">
-            <span className="text-2xl font-bold dark:text-white">9,450</span>
+            <span className="text-2xl font-bold dark:text-white">{d.predictedRange.max.toLocaleString()}</span>
             <span className="text-sm text-gray-500 mb-1 font-medium">KGS</span>
           </div>
-          <p className="text-xs text-green-500 mt-1 flex items-center gap-1">
-            <ArrowRight size={12} className="-rotate-45" /> +2.5% потенциал
+          <p className={cn("text-xs mt-1 flex items-center gap-1", d.trend === 'bullish' ? "text-green-500" : "text-red-500")}>
+            <ArrowRight size={12} className={d.trend === 'bullish' ? "-rotate-45" : "rotate-45"} /> 
+            {d.trend === 'bullish' ? '+2.5%' : '-1.2%'} потенциал
           </p>
         </div>
         
         <div className="p-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
           <p className="text-xs text-gray-500 mb-1">Вероятность</p>
           <div className="flex items-end gap-2">
-            <span className="text-2xl font-bold dark:text-white">78%</span>
+            <span className="text-2xl font-bold dark:text-white">{d.confidenceScore}%</span>
           </div>
           <div className="w-full h-1.5 bg-gray-200 dark:bg-white/10 rounded-full mt-2.5 overflow-hidden">
             <motion.div 
               initial={{ width: 0 }}
-              animate={{ width: '78%' }}
+              animate={{ width: `${d.confidenceScore}%` }}
               transition={{ duration: 1, delay: 0.5 }}
               className="h-full bg-altyn"
             />
@@ -65,11 +106,7 @@ export const MarketForecastCard = ({ className }: MarketForecastCardProps) => {
           <Activity size={14} /> Ключевые факторы
         </h4>
         <ul className="space-y-3">
-          {[
-            { text: 'Ожидаемое снижение ставки ФРС в следующем месяце', positive: true },
-            { text: 'Рекордные закупки золота Центральными банками', positive: true },
-            { text: 'Укрепление доллара на фоне данных по занятости', positive: false }
-          ].map((factor, i) => (
+          {d.factors.map((factor: any, i: number) => (
             <li key={i} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300 items-start">
               <span className={cn(
                 "mt-0.5 shrink-0",
@@ -77,7 +114,7 @@ export const MarketForecastCard = ({ className }: MarketForecastCardProps) => {
               )}>
                 {factor.positive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
               </span>
-              <span className="leading-snug">{factor.text}</span>
+              <span className="leading-snug">{factor.text || factor}</span>
             </li>
           ))}
         </ul>

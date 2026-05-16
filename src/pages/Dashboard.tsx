@@ -9,6 +9,7 @@ import { Loader2 } from 'lucide-react';
 import { useCurrency, formatCurrency } from '@/lib/CurrencyContext';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
 import { AdvancedChart } from '@/components/ui/AdvancedChart';
+import { AIInsightCard } from '@/components/ui/AIInsightCard';
 import { useTheme } from '@/lib/ThemeContext';
 
 interface PortfolioData {
@@ -20,7 +21,7 @@ interface PortfolioData {
 }
 
 export const Dashboard = () => {
-  const { navigateTo, user } = useNavigation();
+  const { currentPage, navigateTo, user } = useNavigation();
   const [portfolio, setPortfolio] = useState<PortfolioData | null>(null);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [goldStats, setGoldStats] = useState<any>(null);
@@ -29,10 +30,11 @@ export const Dashboard = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
+    if (currentPage !== 'dashboard') return;
     const fetchData = async () => {
       try {
         const [pRes, tRes, sRes] = await Promise.all([
-          portfolioAPI.get().catch(() => ({ data: { balanceKGS: 150000.00, goldWeightG: 12.450, goldValueKGS: 78500.00, totalValueKGS: 228500.00, currentGoldPrice: 6300.00 } })),
+          portfolioAPI.get(),
           portfolioAPI.getTransactions().catch(() => ({ data: [] })),
           goldAPI.getStats().catch(() => ({ data: { activeInvestors: 12450, kumtorReserves: '560.2 т', pricePerOunceUSD: 2158.40, inflationKGS: 8.4 } })),
         ]);
@@ -46,7 +48,7 @@ export const Dashboard = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const formatVal = (n: number) => {
     const { amount, symbol } = convert(n);
@@ -92,6 +94,8 @@ export const Dashboard = () => {
             </div>
           </div>
         </header>
+
+        <AIInsightCard />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <GoldCard variant="gold" className="col-span-1 md:col-span-2 p-8">
