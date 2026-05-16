@@ -6,20 +6,17 @@ import { Search, MessageSquare, Phone, Mail, HelpCircle, FileText, Shield } from
 
 export const SupportCenter = () => {
   return (
-    <div className="flex min-h-screen bg-background-primary">
-      <Sidebar />
-      
-      <main className="flex-1 p-6 lg:p-10 overflow-y-auto pb-24 lg:pb-10">
-        <header className="mb-12 text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">Центр поддержки</h2>
-          <p className="text-gray-400 mb-8 text-lg">Как мы можем помочь вам сегодня?</p>
+    <div className="p-6 lg:p-10 pb-24 lg:pb-10">
+      <header className="mb-12 text-center max-w-3xl mx-auto">
+        <h2 className="text-4xl font-bold tracking-tight mb-4">Центр поддержки</h2>
+          <p className="text-slate-500 dark:text-gray-400 mb-8 text-lg">Как мы можем помочь вам сегодня?</p>
           
           <div className="relative group max-w-2xl mx-auto">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-altyn-light transition-colors" size={20} />
             <input 
               type="text" 
               placeholder="Поиск по базе знаний (например: как купить золото?)"
-              className="w-full bg-background-secondary border border-border rounded-2xl px-16 py-5 text-white focus:border-altyn-light transition-all outline-none shadow-2xl"
+              className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl px-16 py-5 text-slate-900 dark:text-white focus:border-altyn-light transition-all outline-none shadow-xl dark:shadow-2xl"
             />
           </div>
         </header>
@@ -35,7 +32,7 @@ export const SupportCenter = () => {
                 <item.icon className="text-altyn-light" size={32} />
               </div>
               <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-              <p className="text-sm text-gray-500 mb-8">{item.desc}</p>
+              <p className="text-sm text-slate-500 dark:text-gray-400 mb-8">{item.desc}</p>
               <button className="outline-button w-full !py-3 !text-sm">{item.action}</button>
             </GoldCard>
           ))}
@@ -59,10 +56,10 @@ export const SupportCenter = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 + i * 0.05 }}
-                  className="p-5 bg-background-secondary border border-border rounded-xl hover:border-altyn/30 transition-all cursor-pointer group flex justify-between items-center"
+                  className="p-5 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-xl hover:border-altyn/30 transition-all cursor-pointer group flex justify-between items-center"
                 >
-                  <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{q}</span>
-                  <span className="text-gray-600 group-hover:text-altyn-light transition-all">→</span>
+                  <span className="text-sm font-medium text-slate-600 dark:text-gray-300 group-hover:text-altyn-light dark:group-hover:text-white transition-colors">{q}</span>
+                  <span className="text-gray-400 dark:text-gray-600 group-hover:text-altyn-light transition-all">→</span>
                 </motion.div>
               ))}
             </div>
@@ -79,9 +76,9 @@ export const SupportCenter = () => {
                 { title: 'Безопасность и хранение', items: 15 },
                 { title: 'Тарифы и комиссии', items: 5 },
               ].map((cat, i) => (
-                <GoldCard key={i} variant="glass" className="p-6 cursor-pointer hover:bg-white/[0.05] transition-all">
-                  <h5 className="font-bold text-white mb-1">{cat.title}</h5>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest">{cat.items} статей</p>
+                <GoldCard key={i} variant="glass" className="p-6 cursor-pointer hover:bg-gray-100 dark:hover:bg-white/5 transition-all">
+                  <h5 className="font-bold text-slate-900 dark:text-white mb-1">{cat.title}</h5>
+                  <p className="text-[10px] text-slate-500 dark:text-gray-500 uppercase tracking-widest">{cat.items} статей</p>
                 </GoldCard>
               ))}
             </div>
@@ -100,7 +97,6 @@ export const SupportCenter = () => {
             </GoldCard>
           </div>
         </div>
-      </main>
     </div>
   );
 };

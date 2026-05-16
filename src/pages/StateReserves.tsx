@@ -7,17 +7,14 @@ import { GeographyMap } from '@/components/ui/GeographyMap';
 
 export const StateReserves = () => {
   return (
-    <div className="flex min-h-screen bg-background-primary text-white">
-      <Sidebar />
-      
-      <main className="flex-1 p-6 lg:p-10 overflow-y-auto pb-24 lg:pb-10">
-        <header className="mb-12">
+    <div className="p-6 lg:p-10 pb-24 lg:pb-10">
+      <header className="mb-12">
           <div className="flex items-center gap-3 mb-2">
             <Shield className="text-altyn-light" size={24} />
             <span className="text-xs font-bold text-altyn-light uppercase tracking-widest">Государственные гарантии</span>
           </div>
           <h2 className="text-4xl font-bold tracking-tight">Резервы и добыча</h2>
-          <p className="text-gray-400 mt-2 max-w-2xl leading-relaxed">
+          <p className="text-slate-500 dark:text-gray-400 mt-2 max-w-2xl leading-relaxed">
             Прозрачный мониторинг золотовалютных резервов Кыргызской Республики и объемов добычи.
           </p>
         </header>
@@ -30,10 +27,10 @@ export const StateReserves = () => {
             { label: 'План добычи 2026', value: '18.5 т', icon: TrendingUp, color: 'text-green-400' },
             { label: 'Уровень покрытия', value: '124%', icon: Shield, color: 'text-purple-400' },
           ].map((item, i) => (
-            <GoldCard key={i} delay={i * 0.1} className="p-6 border-white/5 bg-white/[0.02]">
+            <GoldCard key={i} delay={i * 0.1} className="p-6">
               <item.icon className={item.color + " mb-4"} size={24} />
               <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">{item.label}</p>
-              <h3 className="text-2xl font-bold text-white">{item.value}</h3>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{item.value}</h3>
             </GoldCard>
           ))}
         </div>
@@ -77,7 +74,7 @@ export const StateReserves = () => {
               </p>
               <div className="p-4 bg-white/10 rounded-xl border border-white/10 flex items-center gap-4">
                 <div className="text-2xl font-bold text-white">999.9</div>
-                <div className="text-[10px] text-altyn-pale/50 uppercase tracking-tighter leading-tight">
+                <div className="text-[10px] text-white/70 uppercase tracking-tighter leading-tight">
                   Проба чистоты <br /> государственного золота
                 </div>
               </div>
@@ -88,7 +85,7 @@ export const StateReserves = () => {
               <p className="text-xs text-gray-500 leading-relaxed mb-6">
                 Ежеквартальный независимый аудит проводится международными компаниями для обеспечения 100% соответствия.
               </p>
-              <button className="w-full py-4 bg-background-tertiary border border-white/5 rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:border-white/20 transition-all">
+              <button className="w-full py-4 bg-gray-50 dark:bg-background-tertiary border border-gray-100 dark:border-white/5 rounded-xl text-xs font-bold text-gray-400 hover:text-slate-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-white/20 transition-all">
                 Скачать отчет 2026 Q1
               </button>
             </GoldCard>
@@ -102,7 +99,6 @@ export const StateReserves = () => {
             </div>
           </div>
         </div>
-      </main>
     </div>
   );
 };

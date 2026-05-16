@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoldCard } from '@/components/ui/GoldCard';
-import { useNavigation } from '@/App';
+import { useNavigation } from '@/lib/NavigationContext';
 import { ChevronLeft, Loader2 } from 'lucide-react';
 import { authAPI, setToken } from '@/lib/api';
 

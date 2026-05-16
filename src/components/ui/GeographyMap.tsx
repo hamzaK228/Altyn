@@ -40,13 +40,13 @@ export const GeographyMap = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center bg-[#020204] rounded-3xl p-8 border border-white/5 shadow-2xl relative overflow-hidden">
+    <div className="w-full flex flex-col items-center bg-gray-50 dark:bg-[#020204] rounded-3xl p-8 border border-gray-200 dark:border-white/5 shadow-2xl relative overflow-hidden transition-colors duration-300">
       {/* Header - Minimalist */}
       <div className="w-full flex justify-between items-center mb-8 px-4">
-        <h3 className="text-sm font-black text-white uppercase tracking-[0.4em] opacity-40">Geography of Reserves</h3>
+        <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-[0.4em] opacity-40">Geography of Reserves</h3>
         <div className="flex gap-4">
            <div className="w-2 h-2 rounded-full bg-altyn" />
-           <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">Live Monitoring</span>
+           <span className="text-[10px] font-bold text-gray-400 dark:text-gray-600 uppercase tracking-widest">Live Monitoring</span>
         </div>
       </div>
 
@@ -57,7 +57,7 @@ export const GeographyMap = () => {
         className="relative w-full aspect-[2/1] cursor-crosshair"
       >
         {/* Subtle Grid */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
 
         {/* The Map */}
         <svg viewBox="0 0 950 500" className="absolute inset-0 w-full h-full">
@@ -67,7 +67,9 @@ export const GeographyMap = () => {
               <motion.path
                 d={region.path}
                 fill="transparent"
-                stroke={hoveredItem?.id === region.id ? '#f0c850' : 'rgba(255,255,255,0.05)'}
+                stroke={hoveredItem?.id === region.id ? '#f0c850' : 'rgba(0,0,0,0.05)'}
+                className="dark:stroke-[rgba(255,255,255,0.05)]"
+                style={{ stroke: hoveredItem?.id === region.id ? '#f0c850' : undefined }}
                 strokeWidth="1"
                 strokeDasharray="5,10"
                 animate={{ strokeDashoffset: [0, -100] }}
@@ -76,10 +78,11 @@ export const GeographyMap = () => {
               <motion.path
                 d={region.path}
                 fill={hoveredItem?.id === region.id ? 'rgba(240,200,80,0.08)' : 'transparent'}
-                stroke={hoveredItem?.id === region.id ? '#f0c850' : 'rgba(255,255,255,0.1)'}
+                stroke={hoveredItem?.id === region.id ? '#f0c850' : 'rgba(0,0,0,0.1)'}
+                className="dark:stroke-[rgba(255,255,255,0.1)] transition-all duration-300"
+                style={{ stroke: hoveredItem?.id === region.id ? '#f0c850' : undefined }}
                 strokeWidth={hoveredItem?.id === region.id ? "2" : "0.5"}
                 onMouseEnter={() => setHoveredItem({ type: 'region', id: region.id })}
-                className="transition-all duration-300"
               />
             </g>
           ))}
@@ -112,11 +115,11 @@ export const GeographyMap = () => {
               exit={{ opacity: 0, scale: 0.9 }}
               className="absolute pointer-events-none z-50 translate-x-8 -translate-y-8"
             >
-              <div className="bg-black/90 backdrop-blur-3xl border border-white/10 rounded-2xl px-8 py-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)] min-w-[240px]">
+              <div className="bg-white/90 dark:bg-black/90 backdrop-blur-3xl border border-gray-200 dark:border-white/10 rounded-2xl px-8 py-6 shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] min-w-[240px]">
                 <p className="text-[11px] font-black text-altyn uppercase tracking-[0.3em] mb-2">
                   {hoveredItem.type === 'region' ? 'Monitoring Sector' : 'National Asset'}
                 </p>
-                <h4 className="text-2xl font-black text-white tracking-tighter mb-6">
+                <h4 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter mb-6">
                   {hoveredItem.type === 'region' 
                     ? regions.find(r => r.id === hoveredItem.id)?.name 
                     : deposits.find(d => d.id === hoveredItem.id)?.name}
@@ -127,13 +130,13 @@ export const GeographyMap = () => {
                       <span className="text-[10px] text-gray-500 uppercase font-black tracking-widest">
                         {hoveredItem.type === 'region' ? 'Total Yield' : 'Verified Volume'}
                       </span>
-                      <span className="text-sm text-white font-black">
+                      <span className="text-sm text-slate-900 dark:text-white font-black">
                         {hoveredItem.type === 'region' 
                           ? 'Optimal' 
                           : deposits.find(d => d.id === hoveredItem.id)?.res}
                       </span>
                    </div>
-                   <div className="w-full h-[1px] bg-white/10" />
+                   <div className="w-full h-[1px] bg-gray-200 dark:bg-white/10" />
                    <div className="flex justify-between items-center">
                       <span className="text-[10px] text-gray-500 uppercase font-black tracking-widest">Audit Status</span>
                       <span className="text-[11px] text-green-500 font-black uppercase tracking-widest px-2 py-0.5 bg-green-500/10 rounded">Passed</span>
@@ -149,11 +152,11 @@ export const GeographyMap = () => {
       <div className="w-full mt-10 flex justify-center gap-16 opacity-40">
         <div className="flex items-center gap-3">
            <div className="w-2.5 h-2.5 rounded-full bg-altyn shadow-[0_0_10px_rgba(240,200,80,0.5)]" />
-           <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Gold Reserves</span>
+           <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em]">Gold Reserves</span>
         </div>
         <div className="flex items-center gap-3">
-           <div className="w-2.5 h-2.5 border border-white/20 rounded-full" />
-           <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Territorial Border</span>
+           <div className="w-2.5 h-2.5 border border-gray-400 dark:border-white/20 rounded-full" />
+           <span className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em]">Territorial Border</span>
         </div>
       </div>
     </div>

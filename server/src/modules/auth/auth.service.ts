@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AuthRepository } from './auth.repository.js';
-import { RegisterDto, LoginDto } from './auth.schema.js';
+import { RegisterDto, LoginDto, UpdateProfileDto } from './auth.schema.js';
 import { ApiError } from '../../lib/errors.js';
 
 export class AuthService {
@@ -38,6 +38,21 @@ export class AuthService {
 
   async getMe(id: string) {
     const user = await this.authRepo.findById(id);
+    if (!user) {
+      throw new ApiError(404, 'Пользователь не найден');
+    }
+    return user;
+  }
+
+  async updateProfile(id: string, data: UpdateProfileDto) {
+    if (data.email) {
+      const existing = await this.authRepo.findByEmail(data.email);
+      if (existing && existing.id !== id) {
+        throw new ApiError(400, 'Email уже используется');
+      }
+    }
+    
+    const user = await this.authRepo.updateProfile(id, data);
     if (!user) {
       throw new ApiError(404, 'Пользователь не найден');
     }

@@ -16,9 +16,9 @@ export const GoldCard: React.FC<GoldCardProps> = ({
   delay = 0 
 }) => {
   const variants = {
-    default: "bg-background-secondary border-border",
-    gold: "glass-gold border-altyn/30",
-    glass: "glass border-white/10",
+    default: "bg-white dark:bg-background-secondary border-gray-200 dark:border-white/5 transition-colors duration-300 shadow-xl",
+    gold: "bg-gold-gradient dark:bg-[radial-gradient(circle_at_top_left,rgba(184,134,11,0.2),rgba(184,134,11,0.05))] backdrop-blur-2xl border border-altyn/40 dark:border-altyn/30 transition-all duration-500 shadow-gold-glow",
+    glass: "bg-white/40 dark:bg-white/[0.03] backdrop-blur-3xl border border-gray-200/50 dark:border-white/10 transition-all duration-500 shadow-premium",
   };
 
   return (

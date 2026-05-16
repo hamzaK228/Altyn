@@ -13,3 +13,10 @@ export const loginSchema = z.object({
 
 export type RegisterDto = z.infer<typeof registerSchema>;
 export type LoginDto = z.infer<typeof loginSchema>;
+
+export const updateProfileSchema = z.object({
+  name: z.string().min(2).optional(),
+  email: z.string().email().optional(),
+});
+
+export type UpdateProfileDto = z.infer<typeof updateProfileSchema>;

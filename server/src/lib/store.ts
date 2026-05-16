@@ -34,11 +34,72 @@ export interface TransactionRecord {
   timestamp: Date;
 }
 
+export interface WithdrawalRecord {
+  id: string;
+  userId: string;
+  goldWeightG: number;
+  method: 'pickup' | 'delivery';
+  status: 'pending' | 'approved' | 'ready' | 'completed' | 'cancelled';
+  address?: string;
+  branchId?: string;
+  fee: number;
+  referenceId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SavingsGoalRecord {
+  id: string;
+  userId: string;
+  name: string;
+  targetGoldG: number;
+  currentGoldG: number;
+  deadline?: Date;
+  status: 'active' | 'completed' | 'cancelled';
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface DcaPlanRecord {
+  id: string;
+  userId: string;
+  amountKGS: number;
+  frequency: 'daily' | 'weekly' | 'monthly';
+  isActive: boolean;
+  nextExecutionDate: Date;
+  totalExecutions: number;
+  totalInvestedKGS: number;
+  totalGoldG: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SupportTicketRecord {
+  id: string;
+  userId: string;
+  subject: string;
+  message: string;
+  category: 'general' | 'technical' | 'financial' | 'security';
+  status: 'open' | 'in_progress' | 'resolved' | 'closed';
+  replies: Array<{
+    id: string;
+    message: string;
+    isStaff: boolean;
+    createdAt: Date;
+  }>;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 class InMemoryStore {
   users: UserRecord[] = [];
   goldPrices: GoldPriceRecord[] = [];
   portfolios: PortfolioRecord[] = [];
   transactions: TransactionRecord[] = [];
+  withdrawals: WithdrawalRecord[] = [];
+  savingsGoals: SavingsGoalRecord[] = [];
+  dcaPlans: DcaPlanRecord[] = [];
+  supportTickets: SupportTicketRecord[] = [];
 
   constructor() {
     this.seedGoldPrices();
@@ -61,6 +122,10 @@ class InMemoryStore {
 
   genId(): string {
     return crypto.randomUUID();
+  }
+
+  genRefId(): string {
+    return `ALT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
   }
 }
 

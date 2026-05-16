@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { GoldCard } from '@/components/ui/GoldCard';
 import { PriceTicker } from '@/components/ui/PriceTicker';
 import { Shield, TrendingUp, Landmark, ArrowRight, CheckCircle2, Globe, Lock, Zap } from 'lucide-react';
-import { useNavigation } from '@/App';
+import { useNavigation } from '@/lib/NavigationContext';
 
 export const LandingPage = () => {
   const { navigateTo } = useNavigation();
@@ -38,65 +38,84 @@ export const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden min-h-[90vh] flex items-center">
-        <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-altyn/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 -left-20 w-[300px] h-[300px] bg-altyn/5 blur-[80px] rounded-full" />
+      <section className="relative pt-40 pb-20 px-6 overflow-hidden min-h-[95vh] flex items-center">
+        {/* Animated Background Elements */}
+        <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-altyn/20 blur-[140px] rounded-full animate-pulse" />
+        <div className="absolute bottom-1/4 -left-20 w-[400px] h-[400px] bg-altyn/10 blur-[100px] rounded-full" />
+        <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(240,200,80,0.1)_0%,transparent_70%)]" />
+        </div>
         
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-altyn/10 border border-altyn/20 mb-6">
-              <span className="w-2 h-2 rounded-full bg-altyn-light animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-altyn-light">Государственная платформа КР</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-altyn/10 border border-altyn/20 mb-8">
+              <span className="w-2 h-2 rounded-full bg-altyn-light shadow-[0_0_8px_#f0c850]" />
+              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-altyn-light">Государственная гарантия КР</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8">
-              Ваш золотой <br />
-              <span className="text-gold-gradient">запас будущего</span>
+            <h1 className="text-6xl md:text-8xl font-black leading-[0.95] mb-8 tracking-tighter">
+              Твое золото <br />
+              <span className="text-gold-gradient">в цифре</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
-              Первая цифровая платформа Кыргызстана для покупки и хранения физического золота с государственными гарантиями безопасности.
+            <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-lg leading-relaxed font-medium">
+              Первая национальная платформа для инвестиций в физическое золото с мгновенной ликвидностью.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-6">
               <button 
                 onClick={() => navigateTo('auth')}
-                className="gold-button !py-4 !px-10 text-lg flex items-center justify-center gap-2 group"
+                className="gold-button !py-5 !px-12 text-xl flex items-center justify-center gap-3 group overflow-hidden relative"
               >
-                Создать аккаунт <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10">Начать инвестировать</span>
+                <ArrowRight className="relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-[-20deg]" />
               </button>
               <button 
                 onClick={() => navigateTo('market')}
-                className="outline-button !py-4 !px-10 text-lg"
+                className="outline-button !py-5 !px-12 text-xl hover:border-altyn/50 transition-all"
               >
-                Курсы валют
+                Курс золота
               </button>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 3 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             className="relative"
           >
-            <GoldCard variant="gold" className="p-10 transform rotate-3 hover:rotate-0 transition-transform duration-700 shadow-gold-glow relative z-10">
-               <div className="flex justify-between mb-12">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl" />
-                  <Landmark size={32} className="text-altyn-pale" />
+            <GoldCard variant="gold" className="p-12 transform hover:rotate-0 transition-all duration-1000 shadow-[0_40px_100px_rgba(0,0,0,0.6)] border-white/20 dark:border-altyn/40 group overflow-hidden">
+               <div className="absolute -top-24 -right-24 w-48 h-48 bg-white/10 blur-3xl rounded-full group-hover:bg-white/20 transition-all duration-1000" />
+               <div className="flex justify-between mb-16 items-start">
+                  <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center shadow-inner">
+                     <div className="w-10 h-10 bg-gold-gradient rounded-lg" />
+                  </div>
+                  <Landmark size={40} className="text-white/40 group-hover:text-white transition-colors duration-500" />
                </div>
-               <div className="space-y-2">
-                 <p className="text-altyn-pale/60 text-xs uppercase tracking-widest">Инвестиционный портфель</p>
-                 <h3 className="text-4xl font-bold">124 480 сом</h3>
-                 <p className="text-altyn-light/80 text-lg">32.41 г золота</p>
+               <div className="space-y-4">
+                 <p className="text-white/40 text-[11px] font-black uppercase tracking-[0.4em]">Investment Portfolio</p>
+                 <h3 className="text-5xl font-black text-white tracking-tighter">124 480 <span className="text-2xl font-bold opacity-40 uppercase tracking-normal">сом</span></h3>
+                 <div className="flex items-center gap-3">
+                   <p className="text-altyn-light text-xl font-bold">32.41 г золота</p>
+                   <span className="px-2 py-0.5 bg-green-500/20 text-green-500 text-[10px] font-black rounded">+12.4%</span>
+                 </div>
                </div>
-               <div className="mt-12 flex items-center gap-4 text-xs font-bold text-white/40">
-                  <span className="px-2 py-1 bg-white/10 rounded">AU 999.9</span>
-                  <span className="px-2 py-1 bg-white/10 rounded">GOOD DELIVERY</span>
+               <div className="mt-20 flex justify-between items-end">
+                  <div className="flex gap-4">
+                    <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-white/40 tracking-widest uppercase">AU 999.9</span>
+                    <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-white/40 tracking-widest uppercase">LBMA</span>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Status</p>
+                    <p className="text-xs font-black text-altyn-light uppercase tracking-widest">Verified</p>
+                  </div>
                </div>
             </GoldCard>
-            <div className="absolute -bottom-10 -right-10 w-full h-full bg-altyn/5 border border-white/5 rounded-[2rem] -z-10" />
+            {/* Decorative Shadow Layer */}
+            <div className="absolute -bottom-6 -right-6 w-full h-full bg-altyn/10 border border-white/10 rounded-[3rem] -z-10 blur-sm" />
           </motion.div>
         </div>
       </section>
@@ -121,11 +140,12 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-altyn/5 blur-[150px] rounded-full -z-10" />
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Почему выбирают <span className="text-altyn-light">Алтын</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Мы объединили многовековую ценность золота с современными цифровыми технологиями для вашего финансового суверенитета.</p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">Почему выбирают <span className="text-gold-gradient">Алтын</span></h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">Мы объединили многовековую ценность золота с современными цифровыми технологиями для вашего финансового суверенитета.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -146,12 +166,12 @@ export const LandingPage = () => {
                 desc: 'Многоуровневая система защиты активов и персональных данных мирового уровня.' 
               },
             ].map((feature, i) => (
-              <GoldCard key={i} className="p-10 flex flex-col items-center text-center hover:translate-y-[-10px] transition-all duration-500">
-                <div className="w-16 h-16 bg-altyn/10 rounded-2xl flex items-center justify-center mb-8 border border-altyn/20">
-                  <feature.icon className="text-altyn-light" size={32} />
+              <GoldCard key={feature.title} delay={i * 0.1} className="p-10 flex flex-col items-center text-center hover:bg-white/[0.03] transition-all duration-500 group">
+                <div className="w-20 h-20 bg-altyn/10 rounded-[2rem] flex items-center justify-center mb-8 border border-altyn/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-gold-glow">
+                  <feature.icon className="text-altyn-light" size={40} />
                 </div>
-                <h4 className="text-xl font-bold mb-4">{feature.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
+                <h4 className="text-2xl font-bold mb-4">{feature.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed group-hover:text-gray-400 transition-colors">{feature.desc}</p>
               </GoldCard>
             ))}
           </div>
@@ -160,41 +180,52 @@ export const LandingPage = () => {
 
       {/* Trust & Verification Section (Expanded) */}
       <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-altyn/5 skew-y-3 -z-10" />
+        <div className="absolute top-0 right-0 w-full h-full bg-altyn/[0.02] skew-y-3 -z-10" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-1">
-             <div className="grid grid-cols-2 gap-4">
-                <GoldCard variant="glass" className="p-6">
-                   <Globe className="text-altyn-light mb-4" />
-                   <h5 className="font-bold mb-2">Глобальный стандарт</h5>
+          <div className="order-2 lg:order-1 relative">
+             <div className="absolute -inset-4 bg-altyn/10 blur-3xl rounded-full opacity-20" />
+             <div className="grid grid-cols-2 gap-6 relative z-10">
+                <GoldCard variant="glass" className="p-8 hover:border-altyn/30 transition-all group">
+                   <Globe className="text-altyn-light mb-6 group-hover:scale-110 transition-transform" size={28} />
+                   <h5 className="text-lg font-bold mb-2">Глобальный стандарт</h5>
                    <p className="text-xs text-gray-500">Соответствие LBMA Good Delivery</p>
                 </GoldCard>
-                <GoldCard variant="glass" className="p-6 mt-8">
-                   <Shield className="text-altyn-light mb-4" />
-                   <h5 className="font-bold mb-2">Аудит 24/7</h5>
+                <GoldCard variant="glass" className="p-8 mt-12 hover:border-altyn/30 transition-all group">
+                   <Shield className="text-altyn-light mb-6 group-hover:scale-110 transition-transform" size={28} />
+                   <h5 className="text-lg font-bold mb-2">Аудит 24/7</h5>
                    <p className="text-xs text-gray-500">Прозрачность каждого грамма</p>
                 </GoldCard>
-                <GoldCard variant="glass" className="p-6">
-                   <TrendingUp className="text-altyn-light mb-4" />
-                   <h5 className="font-bold mb-2">Ликвидность</h5>
+                <GoldCard variant="glass" className="p-8 hover:border-altyn/30 transition-all group">
+                   <TrendingUp className="text-altyn-light mb-6 group-hover:scale-110 transition-transform" size={28} />
+                   <h5 className="text-lg font-bold mb-2">Ликвидность</h5>
                    <p className="text-xs text-gray-500">Обратный выкуп по рыночной цене</p>
                 </GoldCard>
-                <GoldCard variant="glass" className="p-6 mt-8">
-                   <Landmark className="text-altyn-light mb-4" />
-                   <h5 className="font-bold mb-2">Нацбанк КР</h5>
+                <GoldCard variant="glass" className="p-8 mt-12 hover:border-altyn/30 transition-all group">
+                   <Landmark className="text-altyn-light mb-6 group-hover:scale-110 transition-transform" size={28} />
+                   <h5 className="text-lg font-bold mb-2">Нацбанк КР</h5>
                    <p className="text-xs text-gray-500">Официальный эмитент платформы</p>
                 </GoldCard>
              </div>
           </div>
           <div className="order-1 lg:order-2">
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">Ваше доверие — <br /> наш главный актив</h2>
-            <p className="text-gray-400 mb-8 leading-relaxed">
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">Ваше доверие — <br /> <span className="text-gold-gradient">наш главный актив</span></h2>
+            <p className="text-gray-400 mb-10 text-lg leading-relaxed">
               Алтын — это не просто приложение, это часть государственной стратегии по обеспечению финансовой стабильности граждан. Мы гарантируем, что каждый цифровой грамм на вашем балансе подтвержден реальным слитком в хранилище.
             </p>
-            <ul className="space-y-4">
-              {['Физическое золото пробы 999.9', 'Независимый международный аудит', 'Мгновенный вывод средств на карты КР'].map(item => (
-                <li key={item} className="flex items-center gap-3 text-sm font-medium">
-                  <CheckCircle2 className="text-altyn-light" size={18} /> {item}
+            <ul className="space-y-6">
+              {[
+                { title: 'Физическое золото пробы 999.9', desc: 'Максимальная чистота слитка' },
+                { title: 'Независимый международный аудит', desc: 'Ежеквартальная проверка резервов' },
+                { title: 'Мгновенный вывод средств', desc: 'Прямая связь с картами Элкарт и Visa' }
+              ].map(item => (
+                <li key={item.title} className="flex gap-4 items-start">
+                  <div className="mt-1 w-6 h-6 rounded-full bg-altyn/10 flex items-center justify-center shrink-0 border border-altyn/20">
+                    <CheckCircle2 className="text-altyn-light" size={14} />
+                  </div>
+                  <div>
+                    <h6 className="font-bold text-white leading-none mb-1">{item.title}</h6>
+                    <p className="text-xs text-gray-500">{item.desc}</p>
+                  </div>
                 </li>
               ))}
             </ul>

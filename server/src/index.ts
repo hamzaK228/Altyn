@@ -9,6 +9,11 @@ import { logger } from './lib/logger.js';
 import authRoutes from './modules/auth/auth.routes.js';
 import goldRoutes from './modules/gold/gold.routes.js';
 import portfolioRoutes from './modules/portfolio/portfolio.routes.js';
+import withdrawalRoutes from './modules/withdrawal/withdrawal.routes.js';
+import savingsRoutes from './modules/savings/savings.routes.js';
+import dcaRoutes from './modules/dca/dca.routes.js';
+import supportRoutes from './modules/support/support.routes.js';
+import aiRoutes from './modules/ai/ai.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -96,6 +101,30 @@ app.get('/', (_req, res) => {
       <div class="endpoint"><span class="method post">POST</span><span class="path">/api/portfolio/buy</span><span class="lock">JWT</span></div>
       <div class="endpoint"><span class="method post">POST</span><span class="path">/api/portfolio/sell</span><span class="lock">JWT</span></div>
       <div class="endpoint"><span class="method get">GET</span><span class="path">/api/portfolio/transactions</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method post">POST</span><span class="path">/api/withdraw</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/withdraw</span><span class="lock">JWT</span></div>
+    </div>
+
+    <div class="section">
+      <h3>Savings & DCA</h3>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/savings</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method post">POST</span><span class="path">/api/savings</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/dca</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method post">POST</span><span class="path">/api/dca</span><span class="lock">JWT</span></div>
+    </div>
+
+    <div class="section">
+      <h3>Support</h3>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/support</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method post">POST</span><span class="path">/api/support</span><span class="lock">JWT</span></div>
+    </div>
+
+    <div class="section">
+      <h3>AI Services</h3>
+      <div class="endpoint"><span class="method post">POST</span><span class="path">/api/ai/chat</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/ai/forecast</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/ai/sentiment</span><span class="lock">JWT</span></div>
+      <div class="endpoint"><span class="method get">GET</span><span class="path">/api/ai/insights</span><span class="lock">JWT</span></div>
     </div>
 
     <div class="section">
@@ -117,6 +146,11 @@ app.get('/health', (_req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/gold', goldRoutes);
 app.use('/api/portfolio', portfolioRoutes);
+app.use('/api/withdraw', withdrawalRoutes);
+app.use('/api/savings', savingsRoutes);
+app.use('/api/dca', dcaRoutes);
+app.use('/api/support', supportRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Error Handler
 app.use(errorHandler);

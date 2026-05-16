@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React from 'react';
 import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { MarketData } from './pages/MarketData';
@@ -6,69 +6,62 @@ import { Transfers } from './pages/Transfers';
 import { StateReserves } from './pages/StateReserves';
 import { SupportCenter } from './pages/SupportCenter';
 import { SettingsPage } from './pages/SettingsPage';
+import { SavingsGoals } from './pages/SavingsGoals';
+import { DCAPage } from './pages/DCA';
+import { WithdrawGold } from './pages/WithdrawGold';
 import { RegistrationForm } from './components/auth/RegistrationForm';
-import { getToken, clearToken } from './lib/api';
+import { ThemeProvider } from './lib/ThemeContext';
+import { CurrencyProvider } from './lib/CurrencyContext';
+import { Sidebar } from './components/ui/Sidebar';
+import { NavigationProvider, useNavigation } from './lib/NavigationContext';
+import { AIChatWidget } from './components/ui/AIChatWidget';
 
-type Page = 'landing' | 'dashboard' | 'market' | 'transfers' | 'reserves' | 'support' | 'settings' | 'auth';
-
-interface AuthUser {
-  id: string;
-  email: string;
-  name: string;
-  role: string;
-}
-
-interface NavigationContextType {
-  currentPage: Page;
-  navigateTo: (page: Page) => void;
-  user: AuthUser | null;
-  setUser: (user: AuthUser | null) => void;
-  logout: () => void;
-}
-
-const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
-
-export const useNavigation = () => {
-  const context = useContext(NavigationContext);
-  if (!context) throw new Error('useNavigation must be used within a NavigationProvider');
-  return context;
-};
-
-function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('landing');
-  const [user, setUser] = useState<AuthUser | null>(null);
-
-  const navigateTo = (page: Page) => {
-    window.scrollTo(0, 0);
-    setCurrentPage(page);
-  };
-
-  const logout = () => {
-    clearToken();
-    setUser(null);
-    navigateTo('landing');
-  };
+function AppContent() {
+  const { currentPage } = useNavigation();
 
   const renderPage = () => {
     switch (currentPage) {
       case 'landing': return <LandingPage />;
+      case 'auth': return <RegistrationForm />;
       case 'dashboard': return <Dashboard />;
       case 'market': return <MarketData />;
       case 'transfers': return <Transfers />;
       case 'reserves': return <StateReserves />;
       case 'support': return <SupportCenter />;
       case 'settings': return <SettingsPage />;
-      case 'auth': return <RegistrationForm />;
+      case 'goals': return <SavingsGoals />;
+      case 'dca': return <DCAPage />;
+      case 'withdraw': return <WithdrawGold />;
       default: return <LandingPage />;
     }
   };
 
+  const isFullPage = currentPage === 'landing' || currentPage === 'auth';
+
   return (
-    <NavigationContext.Provider value={{ currentPage, navigateTo, user, setUser, logout }}>
-      <div className="relative">
-        {renderPage()}
-      </div>
-    </NavigationContext.Provider>
+    <ThemeProvider>
+      <CurrencyProvider>
+        {isFullPage ? (
+          renderPage()
+        ) : (
+          <div className="flex min-h-screen bg-white dark:bg-background-primary text-slate-900 dark:text-white transition-colors duration-300">
+            <Sidebar />
+            <main className="flex-1 relative overflow-y-auto h-screen">
+               {renderPage()}
+            </main>
+            <AIChatWidget />
+          </div>
+        )}
+      </CurrencyProvider>
+    </ThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <NavigationProvider>
+      <AppContent />
+    </NavigationProvider>
   );
 }
 

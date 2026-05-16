@@ -24,4 +24,15 @@ export class AuthRepository {
     store.users.push(user);
     return user;
   }
+
+  async updateProfile(id: string, data: { name?: string; email?: string }): Promise<Omit<UserRecord, 'password'> | undefined> {
+    const user = store.users.find(u => u.id === id);
+    if (!user) return undefined;
+    
+    if (data.name) user.name = data.name;
+    if (data.email) user.email = data.email;
+    
+    const { password, ...rest } = user;
+    return rest;
+  }
 }
